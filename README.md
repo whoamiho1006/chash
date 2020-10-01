@@ -39,7 +39,7 @@ if (IAlgorithm* MD5 = createAlgorithm(EAlgorithm::MD5)) {
 
 ### RipeMD160
 ```
-if (IAlgorithm* RipeMD160 = createAlgorithm(EAlgorithm::SHA256)) {
+if (IAlgorithm* RipeMD160 = createAlgorithm(EAlgorithm::RipeMD160)) {
 	IDigest* Digest = RipeMD160->create();
 
 	if (RipeMD160->init()) {
