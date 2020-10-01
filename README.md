@@ -1,7 +1,7 @@
 # chash
 Hash algorithm library in C++.
 
-##usage
+## examples
 ### SHA-256
 
 ```
