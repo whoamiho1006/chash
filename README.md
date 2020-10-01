@@ -2,8 +2,24 @@
 Hash algorithm library in C++.
 
 ## examples
-### SHA-256
+### SHA-512
+```
+if (IAlgorithm* SHA512 = createAlgorithm(EAlgorithm::SHA512)) {
+	IDigest* Digest = SHA512->create();
 
+	if (SHA512->init()) {
+		SHA512->update((uint8_t*)"abcd", 4);
+		SHA512->finalize(Digest);
+
+		printf("%s\n", Digest->toHex().c_str());
+	}
+}
+
+// output: d8022f2060ad6efd297ab73dcc5355c9b214054b0d1776a136a669d26a7d3b14f73aa0d0ebff19ee333368f0164b6419a96da49e3e481753e7e96b716bdccb6f
+// php's hash('sha512', 'abcd'): d8022f2060ad6efd297ab73dcc5355c9b214054b0d1776a136a669d26a7d3b14f73aa0d0ebff19ee333368f0164b6419a96da49e3e481753e7e96b716bdccb6f
+```
+
+### SHA-256
 ```
 if (IAlgorithm* SHA256 = createAlgorithm(EAlgorithm::SHA256)) {
 	IDigest* Digest = SHA256->create();
