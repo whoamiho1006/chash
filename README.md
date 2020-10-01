@@ -19,6 +19,23 @@ if (IAlgorithm* SHA512 = createAlgorithm(EAlgorithm::SHA512)) {
 // php's hash('sha512', 'abcd'): d8022f2060ad6efd297ab73dcc5355c9b214054b0d1776a136a669d26a7d3b14f73aa0d0ebff19ee333368f0164b6419a96da49e3e481753e7e96b716bdccb6f
 ```
 
+### SHA-384
+```
+if (IAlgorithm* SHA384 = createAlgorithm(EAlgorithm::SHA384)) {
+	IDigest* Digest = SHA384->create();
+
+	if (SHA384->init()) {
+		SHA384->update((uint8_t*)"abcd", 4);
+		SHA384->finalize(Digest);
+
+		printf("%s\n", Digest->toHex().c_str());
+	}
+}
+
+// output: 1165b3406ff0b52a3d24721f785462ca2276c9f454a116c2b2ba20171a7905ea5a026682eb659c4d5f115c363aa3c79b
+// php's hash('sha384', 'abcd'): 1165b3406ff0b52a3d24721f785462ca2276c9f454a116c2b2ba20171a7905ea5a026682eb659c4d5f115c363aa3c79b
+```
+
 ### SHA-256
 ```
 if (IAlgorithm* SHA256 = createAlgorithm(EAlgorithm::SHA256)) {
