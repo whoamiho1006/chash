@@ -5,6 +5,7 @@ namespace chash {
 	enum class EAlgorithm {
 		Unknown = 0,
 		SHA256,
+		SHA384,
 		SHA512,
 		MD5,
 		RipeMD160
