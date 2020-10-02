@@ -5,8 +5,9 @@
 namespace chash {
 	class CCRC32 : public IAlgorithm {
 	private:
-		static const uint32_t POLY_NOMIAL = 0x04C11DB7;
+		static const uint32_t POLY_NOMIAL = 0x4C11DB7;
 		static constexpr uint32_t INIT_VALUE = 0x00000000;
+		static constexpr uint32_t FINAL_XOR = 0x00000000;
 
 	public:
 		CCRC32();

@@ -67,6 +67,7 @@ namespace chash {
 
         uint8_t* digest = outDigest->bytes();
 
+        _digest ^= FINAL_XOR;
         *digest++ = uint8_t(_digest >> 24);
         *digest++ = uint8_t(_digest >> 16);
         *digest++ = uint8_t(_digest >> 8);

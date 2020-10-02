@@ -2,6 +2,9 @@
 Hash algorithm library in C++.
 
 ## examples
+### CRC16/32/64
+Warning: Currently WORK in PROGRESS.
+
 ### SHA-512
 ```
 if (IAlgorithm* SHA512 = createAlgorithm(EAlgorithm::SHA512)) {
