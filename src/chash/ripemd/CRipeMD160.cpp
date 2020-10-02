@@ -76,7 +76,7 @@ namespace chash {
             return false;
         }
 
-        if (outDigest->size() < 16) {
+        if (outDigest->size() < 20) {
             setError(EAlgorithmErrno::InvalidDigest);
             return false;
         }

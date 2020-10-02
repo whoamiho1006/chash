@@ -1,11 +1,16 @@
 #include "chash.hpp"
+
 #include "crc/CCRC16.hpp"
 #include "crc/CCRC32.hpp"
 #include "crc/CCRC64.hpp"
+
 #include "md/CMD5.hpp"
+
 #include "sha/CSHA256.hpp"
 #include "sha/CSHA384.hpp"
 #include "sha/CSHA512.hpp"
+
+#include "ripemd/CRipeMD128.hpp"
 #include "ripemd/CRipeMD160.hpp"
 
 namespace chash {
@@ -31,6 +36,9 @@ namespace chash {
 
         case EAlgorithm::MD5:
             return new CMD5();
+
+        case EAlgorithm::RipeMD128:
+            return new CRipeMD128();
 
         case EAlgorithm::RipeMD160:
             return new CRipeMD160();

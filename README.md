@@ -70,6 +70,23 @@ if (IAlgorithm* MD5 = createAlgorithm(EAlgorithm::MD5)) {
 // php's md5('abcd'): e2fc714c4727ee9395f324cd2e7f331f
 ```
 
+### RipeMD128
+```
+if (IAlgorithm* RipeMD128 = createAlgorithm(EAlgorithm::RipeMD128)) {
+	IDigest* Digest = RipeMD128->create();
+
+	if (RipeMD128->init()) {
+		RipeMD128->update((uint8_t*)"abcd", 4);
+		RipeMD128->finalize(Digest);
+
+		printf("%s\n", Digest->toHex().c_str());
+	}
+}
+
+// output: 47696d5295eabc4aa314c15fc17553ff
+// php's hash('ripemd160', 'abcd'): 47696d5295eabc4aa314c15fc17553ff
+```
+
 ### RipeMD160
 ```
 if (IAlgorithm* RipeMD160 = createAlgorithm(EAlgorithm::RipeMD160)) {

@@ -11,7 +11,8 @@ namespace chash {
 		SHA384		= 0x2001,
 		SHA512		= 0x2002,
 		MD5			= 0x3000,
-		RipeMD160	= 0x4000
+		RipeMD128	= 0x4000,
+		RipeMD160	= 0x4001,
 	};
 
 	enum class EAlgorithmErrno {

@@ -5,6 +5,7 @@ OBJS=src/chash/chash.o \
 	src/chash/crc/CCRC32.o \
 	src/chash/crc/CCRC64.o \
 	src/chash/md/CMD5.o \
+	src/chash/ripemd/CRipeMD128.o \
 	src/chash/ripemd/CRipeMD160.o \
 	src/chash/sha/CSHA256.o \
 	src/chash/sha/CSHA384.o \
