@@ -3,23 +3,23 @@
 #include "chash/IAlgorithm.hpp"
 
 namespace chash {
-	class CCRC32 : public IAlgorithm {
+	class CCRC64 : public IAlgorithm {
 	private:
-		static const uint32_t POLY_NOMIAL = 0x04C11DB7;
-		static constexpr uint32_t INIT_VALUE = 0x00000000;
+		static const uint32_t POLY_NOMIAL = 0x000000000000001bull;
+		static constexpr uint32_t INIT_VALUE = 0x0000000000000000ull;
 
 	public:
-		CCRC32();
-		~CCRC32() { }
+		CCRC64();
+		~CCRC64() { }
 
 	private:
 		bool		_init;
-		uint32_t	_table[256];
-		uint32_t	_digest;
+		uint64_t	_table[256];
+		uint64_t	_digest;
 
 	public:
 		virtual IDigest* create() const override {
-			return new TDigest<sizeof(uint32_t)>();
+			return new TDigest<sizeof(uint64_t)>();
 		}
 
 		bool init() override;

@@ -1,6 +1,7 @@
 #include "chash.hpp"
 #include "crc/CCRC16.hpp"
 #include "crc/CCRC32.hpp"
+#include "crc/CCRC64.hpp"
 #include "md/CMD5.hpp"
 #include "sha/CSHA256.hpp"
 #include "sha/CSHA384.hpp"
@@ -15,6 +16,9 @@ namespace chash {
 
         case EAlgorithm::CRC32:
             return new CCRC32();
+
+        case EAlgorithm::CRC64:
+            return new CCRC64();
 
         case EAlgorithm::SHA256:
             return new CSHA256();

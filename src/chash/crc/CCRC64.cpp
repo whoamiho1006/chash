@@ -1,32 +1,32 @@
-#include "CCRC32.hpp"
+#include "CCRC64.hpp"
 
 namespace chash {
-    CCRC32::CCRC32()
-        : IAlgorithm(EAlgorithm::CRC32), _init(0)
-    {
-    }
+	CCRC64::CCRC64()
+		: IAlgorithm(EAlgorithm::CRC64), _init(false)
+	{
+	}
 
-    bool CCRC32::init() {
+    bool CCRC64::init() {
         if (_init) {
             setError(EAlgorithmErrno::InvalidState);
             return false;
         }
 
+        uint64_t temp = 0;
         _init = true;
-        for (int32_t i = 0; i < 256; i++)
-        {
-            uint32_t c = uint32_t(i << 24);
 
-            for (uint8_t b = 0; b < 8; b++)
-            {
-                if ((c & 0x80000000) != 0)
-                    c = (c << 1) ^ POLY_NOMIAL;
+        for (uint64_t i = 0; i < 256; ++i) {
+            temp = (i << 56);
 
-                else
-                    c <<= 1;
+            for (uint32_t j = 0; j < 8; ++j) {
+                if (temp & 0x8000000000000000ull) {
+                    temp = (temp << 1) ^ POLY_NOMIAL;
+                }
+
+                else temp <<= 1;
             }
 
-            _table[i] = c;
+            _table[i] = temp;
         }
 
         _digest = INIT_VALUE;
@@ -34,28 +34,28 @@ namespace chash {
         return true;
     }
 
-    bool CCRC32::update(const uint8_t* inBytes, size_t inSize) {
+    bool CCRC64::update(const uint8_t* inBytes, size_t inSize) {
         if (!_init) {
             setError(EAlgorithmErrno::InvalidState);
             return false;
         }
 
         while (inSize--) {
-            uint8_t pos = (_digest ^ (*inBytes++ << 24)) >> 24;
-            _digest = uint32_t((_digest << 8) ^ _table[pos]);
+            uint32_t i = ((_digest >> 56) ^ *inBytes++) & 0xff;
+            _digest = (_digest << 8) ^ _table[i];
         }
 
         setError(EAlgorithmErrno::Succeed);
         return true;
     }
 
-    bool CCRC32::finalize(IDigest* outDigest) {
+    bool CCRC64::finalize(IDigest* outDigest) {
         if (!_init) {
             setError(EAlgorithmErrno::InvalidState);
             return false;
         }
 
-        if (outDigest->size() < sizeof(uint32_t)) {
+        if (outDigest->size() < sizeof(uint64_t)) {
             setError(EAlgorithmErrno::InvalidDigest);
             return false;
         }
@@ -67,6 +67,10 @@ namespace chash {
 
         uint8_t* digest = outDigest->bytes();
 
+        *digest++ = uint8_t(_digest >> 56);
+        *digest++ = uint8_t(_digest >> 48);
+        *digest++ = uint8_t(_digest >> 40);
+        *digest++ = uint8_t(_digest >> 32);
         *digest++ = uint8_t(_digest >> 24);
         *digest++ = uint8_t(_digest >> 16);
         *digest++ = uint8_t(_digest >> 8);

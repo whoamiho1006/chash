@@ -4,8 +4,9 @@
 namespace chash {
 	enum class EAlgorithm {
 		Unknown = 0,
-		CRC16,
-		CRC32,
+		CRC16,		// --> IBM Poly-Nomial.
+		CRC32,		// --> IEEE 802.3
+		CRC64,		// --> ISO Poly-Nomial.
 		SHA256,
 		SHA384,
 		SHA512,

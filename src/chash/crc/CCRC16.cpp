@@ -1,8 +1,14 @@
 #include "CCRC16.hpp"
 
 namespace chash {
+
+    const uint16_t CCRC16::TABLE[256] = {
+
+    };
+
     CCRC16::CCRC16()
-        : IAlgorithm(EAlgorithm::CRC16), _init(0)
+        : IAlgorithm(EAlgorithm::CRC16),
+        _init(0), _digest(0)
     {
     }
 
@@ -12,24 +18,23 @@ namespace chash {
             return false;
         }
 
-        uint32_t temp = 0;
         _init = true;
+        for (int32_t i = 0; i < 256; i++) {
+            uint16_t c = uint16_t(i << 8);
 
-        for (uint32_t i = 0; i < 256; ++i) {
-            temp = (i << 8);
+            for (uint8_t b = 0; b < 8; b++)
+            {
+                if ((c & 0x8000) != 0)
+                    c = (c << 1) ^ POLY_NOMIAL;
 
-            for (uint32_t j = 0; j < 8; ++j) {
-                if (temp & 0x8000u) {
-                    temp = (temp << 1) ^ POLY_NOMIAL;
-                }
-
-                else temp <<= 1;
+                else
+                    c <<= 1;
             }
 
-            _table[i] = temp;
+            _table[i] = c;
         }
 
-        _digest = 0;
+        _digest = INIT_VALUE;
         setError(EAlgorithmErrno::Succeed);
         return true;
     }
@@ -41,8 +46,8 @@ namespace chash {
         }
 
         while (inSize--) {
-            uint16_t i = ((_digest >> 8) ^ *inBytes++) & 0xff;
-            _digest = (_digest << 8) ^ _table[i];
+            uint8_t pos = (_digest >> 8) ^ *inBytes++;
+            _digest = uint16_t((_digest << 8) ^ _table[pos]);
         }
 
         setError(EAlgorithmErrno::Succeed);
