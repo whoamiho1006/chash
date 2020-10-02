@@ -3,15 +3,15 @@
 
 namespace chash {
 	enum class EAlgorithm {
-		Unknown = 0,
-		CRC16,		// --> IBM Poly-Nomial.
-		CRC32,		// --> IEEE 802.3
-		CRC64,		// --> ISO Poly-Nomial.
-		SHA256,
-		SHA384,
-		SHA512,
-		MD5,
-		RipeMD160
+		Unknown		= 0x0000,
+		CRC16		= 0x1000,		// --> IBM Poly-Nomial.
+		CRC32		= 0x1001,		// --> IEEE 802.3
+		CRC64		= 0x1002,		// --> ISO Poly-Nomial.
+		SHA256		= 0x2000,
+		SHA384		= 0x2001,
+		SHA512		= 0x2002,
+		MD5			= 0x3000,
+		RipeMD160	= 0x4000
 	};
 
 	enum class EAlgorithmErrno {
