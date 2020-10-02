@@ -4,6 +4,8 @@
 namespace chash {
 	enum class EAlgorithm {
 		Unknown = 0,
+		CRC16,
+		CRC32,
 		SHA256,
 		SHA384,
 		SHA512,

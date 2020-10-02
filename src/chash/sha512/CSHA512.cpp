@@ -1,4 +1,5 @@
 #include "CSHA512.hpp"
+#include <string.h>
 
 #define W(t) w[(t) & 0x0F]
 #define CH(x, y, z) (((x) & (y)) | (~(x) & (z)))

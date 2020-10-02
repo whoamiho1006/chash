@@ -1,6 +1,8 @@
 CXX=g++
 CXXFLAGS=
 OBJS=src/chash/chash.o \
+	src/chash/crc/CCRC16.o \
+	src/chash/crc/CCRC32.o \
 	src/chash/md5/CMD5.o \
 	src/chash/ripemd160/CRipeMD160.o \
 	src/chash/sha256/CSHA256.o \

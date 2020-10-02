@@ -1,4 +1,5 @@
 #include "CRipeMD160.hpp"
+#include <string.h>
 
 #define F(x, y, z) ((x) ^ (y) ^ (z))
 #define G(x, y, z) (((x) & (y)) | (~(x) & (z)))
