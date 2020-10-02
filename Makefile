@@ -3,11 +3,11 @@ CXXFLAGS=
 OBJS=src/chash/chash.o \
 	src/chash/crc/CCRC16.o \
 	src/chash/crc/CCRC32.o \
-	src/chash/md5/CMD5.o \
-	src/chash/ripemd160/CRipeMD160.o \
-	src/chash/sha256/CSHA256.o \
-	src/chash/sha384/CSHA384.o \
-	src/chash/sha512/CSHA512.o
+	src/chash/md/CMD5.o \
+	src/chash/ripemd/CRipeMD160.o \
+	src/chash/sha/CSHA256.o \
+	src/chash/sha/CSHA384.o \
+	src/chash/sha/CSHA512.o
 TARGET=libchash.so
 
 all: $(TARGET)

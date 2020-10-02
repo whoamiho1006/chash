@@ -1,11 +1,11 @@
 #include "chash.hpp"
 #include "crc/CCRC16.hpp"
 #include "crc/CCRC32.hpp"
-#include "md5/CMD5.hpp"
-#include "sha256/CSHA256.hpp"
-#include "sha384/CSHA384.hpp"
-#include "sha512/CSHA512.hpp"
-#include "ripemd160/CRipeMD160.hpp"
+#include "md/CMD5.hpp"
+#include "sha/CSHA256.hpp"
+#include "sha/CSHA384.hpp"
+#include "sha/CSHA512.hpp"
+#include "ripemd/CRipeMD160.hpp"
 
 namespace chash {
     CHASH_API IAlgorithm* createAlgorithm(EAlgorithm algorithm) {
