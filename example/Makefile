@@ -13,8 +13,8 @@ clean:
 	rm -f $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) -L../ -lchash
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -I ../src -o $@ -L../ -lchash
+	$(CXX) $(CXXFLAGS) -c $< -I ../src -o $@
 
