@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="chash\crc\CCRC16.cpp">
+      <Filter>chash\crc</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\crc\CCRC32.cpp">
+      <Filter>chash\crc</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\crc\CCRC64.cpp">
+      <Filter>chash\crc</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\md\CMD4.cpp">
+      <Filter>chash\md</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\md\CMD5.cpp">
+      <Filter>chash\md</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\sha\CSHA256.cpp">
+      <Filter>chash\sha</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\sha\CSHA384.cpp">
+      <Filter>chash\sha</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\sha\CSHA512.cpp">
+      <Filter>chash\sha</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\ripemd\CRipeMD128.cpp">
+      <Filter>chash\ripemd</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\ripemd\CRipeMD160.cpp">
+      <Filter>chash\ripemd</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\chash.cpp">
+      <Filter>chash</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="chash\crc\CCRC64.hpp">
+      <Filter>chash\crc</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\crc\CCRC16.hpp">
+      <Filter>chash\crc</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\crc\CCRC32.hpp">
+      <Filter>chash\crc</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\md\CMD5.hpp">
+      <Filter>chash\md</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\md\CMD4.hpp">
+      <Filter>chash\md</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\sha\CSHA256.hpp">
+      <Filter>chash\sha</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\sha\CSHA384.hpp">
+      <Filter>chash\sha</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\sha\CSHA512.hpp">
+      <Filter>chash\sha</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\ripemd\CRipeMD128.hpp">
+      <Filter>chash\ripemd</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\ripemd\CRipeMD160.hpp">
+      <Filter>chash\ripemd</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\chash.hpp">
+      <Filter>chash</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\IAlgorithm.hpp">
+      <Filter>chash</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\IDigest.hpp">
+      <Filter>chash</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\Macros.hpp">
+      <Filter>chash</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="chash">
+      <UniqueIdentifier>{a4c9c8a0-640e-4335-bc63-005158807b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chash\crc">
+      <UniqueIdentifier>{f1148e02-c82b-4a71-b32b-c8dc4398f190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chash\md">
+      <UniqueIdentifier>{a53a4718-5097-48c7-8d78-3ead0ac48541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chash\sha">
+      <UniqueIdentifier>{69002949-5cae-4ce6-9f29-1219869b6fec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chash\ripemd">
+      <UniqueIdentifier>{f5846dbc-993b-40a4-926d-f6d3327360d8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Makefile" />
+    <None Include="..\README.md" />
+    <None Include="..\LICENSE" />
+  </ItemGroup>
+</Project>
