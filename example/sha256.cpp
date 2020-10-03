@@ -1,12 +1,9 @@
-﻿
-#include "chash/chash.hpp"
-#pragma comment(lib, "libchash.lib")
-
+﻿#include "chash/chash.hpp"
 #include <stdio.h>
 
 using namespace chash;
 
-int main()
+int sha256()
 {
 	if (IAlgorithm* SHA256 = createAlgorithm(EAlgorithm::SHA256)) {
 		IDigest* Digest = SHA256->create();
@@ -15,7 +12,10 @@ int main()
 			SHA256->update((uint8_t*)"abcd", 4);
 			SHA256->finalize(Digest);
 
-			printf("%s\n", Digest->toHex().c_str());
+			printf("SHA256(abcd): %s\n", Digest->toHex().c_str());
+			return 0;
 		}
 	}
+
+	return -1;
 }

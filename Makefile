@@ -19,7 +19,7 @@ TARGET=libchash.so
 all: $(TARGET)
 
 clean:
-	rm -rf *.o
+	rm -rf $(OBJS)
 	rm -f $(TARGET)
 
 $(TARGET): $(OBJS)
