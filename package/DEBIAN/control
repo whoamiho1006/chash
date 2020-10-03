@@ -5,4 +5,5 @@ Priority: optional
 Architecture: amd64
 Maintainer: jay94ks <jay94ks@gmail.com>
 Homepage: https://github.com/whoamiho1006/chash
-Depends build-essential
+Depends: build-essential
+Description: Simple C++ Hash function library
