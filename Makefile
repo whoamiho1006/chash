@@ -1,5 +1,7 @@
 CXX=g++
-CXXFLAGS=
+STRIP=strip
+CXXFLAGS=-fPIC --shared
+
 OBJS=src/chash/chash.o \
 	src/chash/crc/CCRC16.o \
 	src/chash/crc/CCRC32.o \
@@ -11,6 +13,7 @@ OBJS=src/chash/chash.o \
 	src/chash/sha/CSHA256.o \
 	src/chash/sha/CSHA384.o \
 	src/chash/sha/CSHA512.o
+
 TARGET=libchash.so
 
 all: $(TARGET)
@@ -20,8 +23,8 @@ clean:
 	rm -f $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CXX) --shared -o $@ $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
 
 %.o: %.cpp
-	$(CXX) -fPIC -c $< -I src -o $@
+	$(CXX) $(CXXFLAGS) -c $< -I src -o $@
 
