@@ -11,6 +11,7 @@ namespace chash {
 		SHA384		= 0x2001,
 		SHA512		= 0x2002,
 		MD5			= 0x3000,
+		MD4			= 0x3001,
 		RipeMD128	= 0x4000,
 		RipeMD160	= 0x4001,
 	};

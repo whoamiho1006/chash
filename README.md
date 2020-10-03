@@ -73,6 +73,23 @@ if (IAlgorithm* MD5 = createAlgorithm(EAlgorithm::MD5)) {
 // php's md5('abcd'): e2fc714c4727ee9395f324cd2e7f331f
 ```
 
+### MD4
+```
+if (IAlgorithm* MD4 = createAlgorithm(EAlgorithm::MD4)) {
+	IDigest* Digest = MD4->create();
+
+	if (MD4->init()) {
+		MD4->update((uint8_t*)"abcd", 4);
+		MD4->finalize(Digest);
+
+		printf("%s\n", Digest->toHex().c_str());
+	}
+}
+
+// output: 41decd8f579255c5200f86a4bb3ba740
+// php's md5('abcd'): 41decd8f579255c5200f86a4bb3ba740
+```
+
 ### RipeMD128
 ```
 if (IAlgorithm* RipeMD128 = createAlgorithm(EAlgorithm::RipeMD128)) {

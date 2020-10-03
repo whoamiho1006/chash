@@ -5,6 +5,7 @@
 #include "crc/CCRC64.hpp"
 
 #include "md/CMD5.hpp"
+#include "md/CMD4.hpp"
 
 #include "sha/CSHA256.hpp"
 #include "sha/CSHA384.hpp"
@@ -36,6 +37,9 @@ namespace chash {
 
         case EAlgorithm::MD5:
             return new CMD5();
+
+        case EAlgorithm::MD4:
+            return new CMD4();
 
         case EAlgorithm::RipeMD128:
             return new CRipeMD128();
