@@ -72,9 +72,6 @@
     <ClInclude Include="chash\IAlgorithm.hpp">
       <Filter>chash</Filter>
     </ClInclude>
-    <ClInclude Include="chash\IDigest.hpp">
-      <Filter>chash</Filter>
-    </ClInclude>
     <ClInclude Include="chash\Macros.hpp">
       <Filter>chash</Filter>
     </ClInclude>

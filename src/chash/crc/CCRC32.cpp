@@ -49,32 +49,20 @@ namespace chash {
         return true;
     }
 
-    bool CCRC32::finalize(IDigest* outDigest) {
-        if (!_init) {
-            setError(EAlgorithmErrno::InvalidState);
-            return false;
-        }
+	bool CCRC32::finalize(CDigest& outDigest) {
+		if (!_init) {
+			setError(EAlgorithmErrno::InvalidState);
+			return false;
+		}
 
-        if (outDigest->size() < sizeof(uint32_t)) {
-            setError(EAlgorithmErrno::InvalidDigest);
-            return false;
-        }
+		_digest ^= FINAL_XOR;
+		outDigest.push_back(uint8_t(_digest >> 24));
+		outDigest.push_back(uint8_t(_digest >> 16));
+		outDigest.push_back(uint8_t(_digest >> 8));
+		outDigest.push_back(uint8_t(_digest));
 
-        if (!outDigest) {
-            _init = false;
-            return true;
-        }
-
-        uint8_t* digest = outDigest->bytes();
-
-        _digest ^= FINAL_XOR;
-        *digest++ = uint8_t(_digest >> 24);
-        *digest++ = uint8_t(_digest >> 16);
-        *digest++ = uint8_t(_digest >> 8);
-        *digest++ = uint8_t(_digest);
-
-        _init = false;
-        setError(EAlgorithmErrno::Succeed);
-        return true;
-    }
+		_init = false;
+		setError(EAlgorithmErrno::Succeed);
+		return true;
+	}
 }

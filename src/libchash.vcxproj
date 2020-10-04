@@ -159,7 +159,6 @@
     <ClInclude Include="chash\crc\CCRC16.hpp" />
     <ClInclude Include="chash\crc\CCRC32.hpp" />
     <ClInclude Include="chash\crc\CCRC64.hpp" />
-    <ClInclude Include="chash\IDigest.hpp" />
     <ClInclude Include="chash\IAlgorithm.hpp" />
     <ClInclude Include="chash\Macros.hpp" />
     <ClInclude Include="chash\md\CMD4.hpp" />

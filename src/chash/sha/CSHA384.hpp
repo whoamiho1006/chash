@@ -1,5 +1,4 @@
 #pragma once
-#include "chash/IDigest.hpp"
 #include "chash/IAlgorithm.hpp"
 
 namespace chash {
@@ -19,15 +18,12 @@ namespace chash {
 		uint8_t		_buffer[128];
 
 	public:
-		virtual IDigest* create() const override {
-			return new TDigest<48>();
-		}
-
 		bool init() override;
 		bool update(const uint8_t* inBytes, size_t inSize) override;
-		bool finalize(IDigest* outDigest) override;
+		bool finalize(CDigest& outDigest) override;
 
 	private:
+		void updateFinal();
 		void flush();
 		void transform(uint64_t* in256);
 	};

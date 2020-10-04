@@ -102,56 +102,51 @@ namespace chash {
         return true;
     }
 
-    bool CSHA256::finalize(IDigest* outDigest) {
-        if (!_init) {
-            setError(EAlgorithmErrno::InvalidState);
-            return false;
-        }
+	bool CSHA256::finalize(CDigest& outDigest) {
+		if (!_init) {
+			setError(EAlgorithmErrno::InvalidState);
+			return false;
+		}
 
-        if (outDigest->size() < 32) {
-            setError(EAlgorithmErrno::InvalidDigest);
-            return false;
-        }
+		updateFinal();
+		outDigest.reserve(32);
 
-        if (!outDigest) {
-            _init = false;
-            return true;
-        }
+		for (uint32_t i = 0; i < 8; ++i) {
+			outDigest.push_back(uint8_t(_state[i] >> 24));
+			outDigest.push_back(uint8_t(_state[i] >> 16));
+			outDigest.push_back(uint8_t(_state[i] >> 8));
+			outDigest.push_back(uint8_t(_state[i]));
+		}
 
-        uint64_t lenBits = _count << 3;
-        uint32_t pos = uint32_t(_count) & 0x3f;
-        uint8_t* digest = outDigest->bytes();
+		setError(EAlgorithmErrno::Succeed);
+		return true;
+	}
 
-        _init = false;
-        _buffer[pos++] = 0x80;
-        while (pos != (64 - 8)) {
-            pos &= 0x3f;
+	void CSHA256::updateFinal() {
+		uint64_t lenBits = _count << 3;
+		uint32_t pos = uint32_t(_count) & 0x3f;
 
-            if (!pos) {
-                flush();
-            }
+		_init = false;
+		_buffer[pos++] = 0x80;
+		while (pos != (64 - 8)) {
+			pos &= 0x3f;
 
-            _buffer[pos++] = 0;
-        }
+			if (!pos) {
+				flush();
+			}
 
-        for (uint32_t i = 0; i < 8; ++i) {
-            _buffer[pos++] = uint8_t(lenBits >> 56);
-            lenBits <<= 8;
-        }
+			_buffer[pos++] = 0;
+		}
 
-        flush();
-        for (uint32_t i = 0; i < 8; ++i) {
-            *digest++ = uint8_t(_state[i] >> 24);
-            *digest++ = uint8_t(_state[i] >> 16);
-            *digest++ = uint8_t(_state[i] >> 8);
-            *digest++ = uint8_t(_state[i]);
-        }
+		for (uint32_t i = 0; i < 8; ++i) {
+			_buffer[pos++] = uint8_t(lenBits >> 56);
+			lenBits <<= 8;
+		}
 
-        setError(EAlgorithmErrno::Succeed);
-        return true;
-    }
+		flush();
+	}
 
-    void CSHA256::transform(const uint32_t* data)
+	void CSHA256::transform(const uint32_t* data)
     {
         uint32_t W[16],
             a = _state[0], b = _state[1], c = _state[2],

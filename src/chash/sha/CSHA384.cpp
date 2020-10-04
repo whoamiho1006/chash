@@ -88,57 +88,51 @@ namespace chash {
         return true;
     }
 
-    bool CSHA384::finalize(IDigest* outDigest) {
-        if (!_init) {
-            setError(EAlgorithmErrno::InvalidState);
-            return false;
-        }
+	bool CSHA384::finalize(CDigest& outDigest) {
+		if (!_init) {
+			setError(EAlgorithmErrno::InvalidState);
+			return false;
+		}
 
-        if (outDigest->size() < 48) {
-            setError(EAlgorithmErrno::InvalidDigest);
-            return false;
-        }
+		updateFinal();
+		outDigest.reserve(48);
 
-        if (!outDigest) {
-            _init = false;
-            return true;
-        }
+		for (uint32_t i = 0; i < 6; ++i) {
+			outDigest.push_back(uint8_t(_state[i] >> 56));
+			outDigest.push_back(uint8_t(_state[i] >> 48));
+			outDigest.push_back(uint8_t(_state[i] >> 40));
+			outDigest.push_back(uint8_t(_state[i] >> 32));
+			outDigest.push_back(uint8_t(_state[i] >> 24));
+			outDigest.push_back(uint8_t(_state[i] >> 16));
+			outDigest.push_back(uint8_t(_state[i] >> 8));
+			outDigest.push_back(uint8_t(_state[i]));
+		}
 
-        uint8_t lenBits[8];
-        uint64_t length = _count << 3;
-        uint32_t index = uint32_t(_count & 0x7f),
-            pads = index < 120 ? 120 - index : 128 + 120 - index;
+		setError(EAlgorithmErrno::Succeed);
+		return true;
+	}
 
-        uint8_t* digest = outDigest->bytes();
+	void CSHA384::updateFinal()
+	{
+		uint8_t lenBits[8];
+		uint64_t length = _count << 3;
+		uint32_t index = uint32_t(_count & 0x7f),
+			pads = index < 120 ? 120 - index : 128 + 120 - index;
 
-        lenBits[0] = uint8_t(length >> 56);
-        lenBits[1] = uint8_t(length >> 48);
-        lenBits[2] = uint8_t(length >> 40);
-        lenBits[3] = uint8_t(length >> 32);
-        lenBits[4] = uint8_t(length >> 24);
-        lenBits[5] = uint8_t(length >> 16);
-        lenBits[6] = uint8_t(length >> 8);
-        lenBits[7] = uint8_t(length);
+		lenBits[0] = uint8_t(length >> 56);
+		lenBits[1] = uint8_t(length >> 48);
+		lenBits[2] = uint8_t(length >> 40);
+		lenBits[3] = uint8_t(length >> 32);
+		lenBits[4] = uint8_t(length >> 24);
+		lenBits[5] = uint8_t(length >> 16);
+		lenBits[6] = uint8_t(length >> 8);
+		lenBits[7] = uint8_t(length);
 
-        update(PADDING, pads);
-        update(lenBits, 8);
+		update(PADDING, pads);
+		update(lenBits, 8);
+	}
 
-        for (uint32_t i = 0; i < 6; ++i) {
-            *digest++ = uint8_t(_state[i] >> 56);
-            *digest++ = uint8_t(_state[i] >> 48);
-            *digest++ = uint8_t(_state[i] >> 40);
-            *digest++ = uint8_t(_state[i] >> 32);
-            *digest++ = uint8_t(_state[i] >> 24);
-            *digest++ = uint8_t(_state[i] >> 16);
-            *digest++ = uint8_t(_state[i] >> 8);
-            *digest++ = uint8_t(_state[i]);
-        }
-
-        setError(EAlgorithmErrno::Succeed);
-        return true;
-    }
-
-    void CSHA384::flush()
+	void CSHA384::flush()
     {
         uint64_t block[16];
 

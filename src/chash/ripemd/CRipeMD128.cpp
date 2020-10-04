@@ -66,52 +66,45 @@ namespace chash {
 		return true;
 	}
 
-	bool CRipeMD128::finalize(IDigest* outDigest) {
-        if (!_init) {
-            setError(EAlgorithmErrno::InvalidState);
-            return false;
-        }
+	bool CRipeMD128::finalize(CDigest& outDigest) {
+		if (!_init) {
+			setError(EAlgorithmErrno::InvalidState);
+			return false;
+		}
 
-        if (outDigest->size() < 16) {
-            setError(EAlgorithmErrno::InvalidDigest);
-            return false;
-        }
+		updateFinal();
+		outDigest.reserve(16);
 
-        if (!outDigest) {
-            _init = false;
-            setError(EAlgorithmErrno::Succeed);
-            return true;
-        }
+		for (int32_t i = 0, j = 0; j < 16; ++i, j += 4) {
+			outDigest.push_back(uint8_t(_state[i]));
+			outDigest.push_back(uint8_t(_state[i] >> 8));
+			outDigest.push_back(uint8_t(_state[i] >> 16));
+			outDigest.push_back(uint8_t(_state[i] >> 24));
+		}
 
-        uint8_t lenBits[8];
-        uint64_t length = _count << 3;
-        uint32_t index = uint32_t(_count & 0x3f),
-            pads = index < 56 ? 56 - index : 120 - index;
+		_init = false;
+		setError(EAlgorithmErrno::Succeed);
+		return true;
+	}
 
-        uint8_t* digest = outDigest->bytes();
+	void CRipeMD128::updateFinal()
+	{
+		uint8_t lenBits[8];
+		uint64_t length = _count << 3;
+		uint32_t index = uint32_t(_count & 0x3f),
+			pads = index < 56 ? 56 - index : 120 - index;
 
-        lenBits[0] = uint8_t(length);
-        lenBits[1] = uint8_t(length >> 8);
-        lenBits[2] = uint8_t(length >> 16);
-        lenBits[3] = uint8_t(length >> 24);
-        lenBits[4] = uint8_t(length >> 32);
-        lenBits[5] = uint8_t(length >> 40);
-        lenBits[6] = uint8_t(length >> 48);
-        lenBits[7] = uint8_t(length >> 56);
+		lenBits[0] = uint8_t(length);
+		lenBits[1] = uint8_t(length >> 8);
+		lenBits[2] = uint8_t(length >> 16);
+		lenBits[3] = uint8_t(length >> 24);
+		lenBits[4] = uint8_t(length >> 32);
+		lenBits[5] = uint8_t(length >> 40);
+		lenBits[6] = uint8_t(length >> 48);
+		lenBits[7] = uint8_t(length >> 56);
 
-        update(PADDING, pads);
-        update(lenBits, 8);
-
-        for (int32_t i = 0, j = 0; j < 16; ++i, j += 4) {
-            digest[j] = uint8_t(_state[i]);
-            digest[j + 1] = uint8_t(_state[i] >> 8);
-            digest[j + 2] = uint8_t(_state[i] >> 16);
-            digest[j + 3] = uint8_t(_state[i] >> 24);
-        }
-
-        _init = false;
-        setError(EAlgorithmErrno::Succeed);
-        return true;
+		update(PADDING, pads);
+		update(lenBits, 8);
 	}
 
 	void CRipeMD128::flush() {

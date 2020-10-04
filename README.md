@@ -8,13 +8,13 @@ Warning: Currently WORK in PROGRESS.
 ### SHA-512
 ```
 if (IAlgorithm* SHA512 = createAlgorithm(EAlgorithm::SHA512)) {
-	IDigest* Digest = SHA512->create();
+	CDigest Digest;
 
 	if (SHA512->init()) {
 		SHA512->update((uint8_t*)"abcd", 4);
 		SHA512->finalize(Digest);
 
-		printf("%s\n", Digest->toHex().c_str());
+		printf("%s\n", toHex(Digest).c_str());
 	}
 }
 
@@ -25,13 +25,13 @@ if (IAlgorithm* SHA512 = createAlgorithm(EAlgorithm::SHA512)) {
 ### SHA-384
 ```
 if (IAlgorithm* SHA384 = createAlgorithm(EAlgorithm::SHA384)) {
-	IDigest* Digest = SHA384->create();
+	CDigest Digest;
 
 	if (SHA384->init()) {
 		SHA384->update((uint8_t*)"abcd", 4);
 		SHA384->finalize(Digest);
 
-		printf("%s\n", Digest->toHex().c_str());
+		printf("%s\n", toHex(Digest).c_str());
 	}
 }
 
@@ -42,13 +42,13 @@ if (IAlgorithm* SHA384 = createAlgorithm(EAlgorithm::SHA384)) {
 ### SHA-256
 ```
 if (IAlgorithm* SHA256 = createAlgorithm(EAlgorithm::SHA256)) {
-	IDigest* Digest = SHA256->create();
+	CDigest Digest;
 
 	if (SHA256->init()) {
 		SHA256->update((uint8_t*)"abcd", 4);
 		SHA256->finalize(Digest);
-
-		printf("%s\n", Digest->toHex().c_str());
+		
+		printf("%s\n", toHex(Digest).c_str());
 	}
 }
 
@@ -59,13 +59,13 @@ if (IAlgorithm* SHA256 = createAlgorithm(EAlgorithm::SHA256)) {
 ### MD5
 ```
 if (IAlgorithm* MD5 = createAlgorithm(EAlgorithm::MD5)) {
-	IDigest* Digest = MD5->create();
+	CDigest Digest;
 
 	if (MD5->init()) {
 		MD5->update((uint8_t*)"abcd", 4);
 		MD5->finalize(Digest);
-
-		printf("%s\n", Digest->toHex().c_str());
+		
+		printf("%s\n", toHex(Digest).c_str());
 	}
 }
 
@@ -76,13 +76,13 @@ if (IAlgorithm* MD5 = createAlgorithm(EAlgorithm::MD5)) {
 ### MD4
 ```
 if (IAlgorithm* MD4 = createAlgorithm(EAlgorithm::MD4)) {
-	IDigest* Digest = MD4->create();
+	CDigest Digest;
 
 	if (MD4->init()) {
 		MD4->update((uint8_t*)"abcd", 4);
 		MD4->finalize(Digest);
-
-		printf("%s\n", Digest->toHex().c_str());
+		
+		printf("%s\n", toHex(Digest).c_str());
 	}
 }
 
@@ -93,13 +93,13 @@ if (IAlgorithm* MD4 = createAlgorithm(EAlgorithm::MD4)) {
 ### RipeMD128
 ```
 if (IAlgorithm* RipeMD128 = createAlgorithm(EAlgorithm::RipeMD128)) {
-	IDigest* Digest = RipeMD128->create();
+	CDigest Digest;
 
 	if (RipeMD128->init()) {
 		RipeMD128->update((uint8_t*)"abcd", 4);
 		RipeMD128->finalize(Digest);
-
-		printf("%s\n", Digest->toHex().c_str());
+		
+		printf("%s\n", toHex(Digest).c_str());
 	}
 }
 
@@ -110,13 +110,13 @@ if (IAlgorithm* RipeMD128 = createAlgorithm(EAlgorithm::RipeMD128)) {
 ### RipeMD160
 ```
 if (IAlgorithm* RipeMD160 = createAlgorithm(EAlgorithm::RipeMD160)) {
-	IDigest* Digest = RipeMD160->create();
+	CDigest Digest;
 
 	if (RipeMD160->init()) {
 		RipeMD160->update((uint8_t*)"abcd", 4);
 		RipeMD160->finalize(Digest);
-
-		printf("%s\n", Digest->toHex().c_str());
+		
+		printf("%s\n", toHex(Digest).c_str());
 	}
 }
 

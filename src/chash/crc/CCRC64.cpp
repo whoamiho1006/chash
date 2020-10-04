@@ -49,35 +49,23 @@ namespace chash {
         return true;
     }
 
-    bool CCRC64::finalize(IDigest* outDigest) {
-        if (!_init) {
-            setError(EAlgorithmErrno::InvalidState);
-            return false;
-        }
+	bool CCRC64::finalize(CDigest& outDigest) {
+		if (!_init) {
+			setError(EAlgorithmErrno::InvalidState);
+			return false;
+		}
 
-        if (outDigest->size() < sizeof(uint64_t)) {
-            setError(EAlgorithmErrno::InvalidDigest);
-            return false;
-        }
+		outDigest.push_back(uint8_t(_digest >> 56));
+		outDigest.push_back(uint8_t(_digest >> 48));
+		outDigest.push_back(uint8_t(_digest >> 40));
+		outDigest.push_back(uint8_t(_digest >> 32));
+		outDigest.push_back(uint8_t(_digest >> 24));
+		outDigest.push_back(uint8_t(_digest >> 16));
+		outDigest.push_back(uint8_t(_digest >> 8));
+		outDigest.push_back(uint8_t(_digest));
 
-        if (!outDigest) {
-            _init = false;
-            return true;
-        }
-
-        uint8_t* digest = outDigest->bytes();
-
-        *digest++ = uint8_t(_digest >> 56);
-        *digest++ = uint8_t(_digest >> 48);
-        *digest++ = uint8_t(_digest >> 40);
-        *digest++ = uint8_t(_digest >> 32);
-        *digest++ = uint8_t(_digest >> 24);
-        *digest++ = uint8_t(_digest >> 16);
-        *digest++ = uint8_t(_digest >> 8);
-        *digest++ = uint8_t(_digest);
-
-        _init = false;
-        setError(EAlgorithmErrno::Succeed);
-        return true;
-    }
+		_init = false;
+		setError(EAlgorithmErrno::Succeed);
+		return true;
+	}
 }
