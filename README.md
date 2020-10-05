@@ -22,7 +22,7 @@ if (auto CRC64 = create(algorithm::CRC64)) {
 ```
 
 ### CRC32
-This implements CRC-32/BZIP2. (Init: 0xFFFFFFFF, Poly: 0x04C11DB7)
+This implements CRC-32/BZIP2 (IEEE 802.3). (Init: 0xFFFFFFFF, Poly: 0x04C11DB7)
 ```
 if (auto CRC32 = create(algorithm::CRC32)) {
 	digest_t Digest;
