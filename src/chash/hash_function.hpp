@@ -36,7 +36,7 @@ namespace chash {
 		}
 	};
 
-	/* IAlgorithm interface */
+	/* hash_function interface */
 	class hash_function {
 	public:
 		hash_function(algorithm type)
