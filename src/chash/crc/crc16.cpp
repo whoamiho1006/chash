@@ -2,10 +2,6 @@
 
 namespace chash {
 
-    const uint16_t crc16::TABLE[256] = {
-
-    };
-
     crc16::crc16()
         : hash_function(algorithm::CRC16),
         _init(0), _digest(0)

@@ -48,6 +48,7 @@ namespace chash {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
 
+		_digest ^= FINAL_XOR;
 		outDigest.push_back(uint8_t(_digest >> 56));
 		outDigest.push_back(uint8_t(_digest >> 48));
 		outDigest.push_back(uint8_t(_digest >> 40));

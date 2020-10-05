@@ -7,7 +7,6 @@ namespace chash {
 		static constexpr uint16_t POLY_NOMIAL = 0x8005;
 		static constexpr uint16_t INIT_VALUE = 0x0000;
 		static constexpr uint16_t FINAL_XOR = 0x0000;
-		static const uint16_t TABLE[256];
 
 	public:
 		crc16();
