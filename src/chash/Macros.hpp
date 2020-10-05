@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <exception>
+#include <stdexcept>
 
 #if defined(_WIN32) || defined(_WIN64)
 #ifdef __CHASH_EXPORTS__
