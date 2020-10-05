@@ -7,8 +7,8 @@ Warning: Currently WORK in PROGRESS.
 
 ### SHA-512
 ```
-if (IAlgorithm* SHA512 = createAlgorithm(EAlgorithm::SHA512)) {
-	CDigest Digest;
+if (auto SHA512 = chash::create(algorithm::SHA512)) {
+	chash::digest_t Digest;
 
 	if (SHA512->init()) {
 		SHA512->update((uint8_t*)"abcd", 4);
@@ -24,8 +24,8 @@ if (IAlgorithm* SHA512 = createAlgorithm(EAlgorithm::SHA512)) {
 
 ### SHA-384
 ```
-if (IAlgorithm* SHA384 = createAlgorithm(EAlgorithm::SHA384)) {
-	CDigest Digest;
+if (auto SHA384 = chash::create(algorithm::SHA384)) {
+	chash::digest_t Digest;
 
 	if (SHA384->init()) {
 		SHA384->update((uint8_t*)"abcd", 4);
@@ -41,8 +41,8 @@ if (IAlgorithm* SHA384 = createAlgorithm(EAlgorithm::SHA384)) {
 
 ### SHA-256
 ```
-if (IAlgorithm* SHA256 = createAlgorithm(EAlgorithm::SHA256)) {
-	CDigest Digest;
+if (auto SHA256 = chash::create(algorithm::SHA256)) {
+	chash::digest_t Digest;
 
 	if (SHA256->init()) {
 		SHA256->update((uint8_t*)"abcd", 4);
@@ -58,8 +58,8 @@ if (IAlgorithm* SHA256 = createAlgorithm(EAlgorithm::SHA256)) {
 
 ### MD5
 ```
-if (IAlgorithm* MD5 = createAlgorithm(EAlgorithm::MD5)) {
-	CDigest Digest;
+if (auto MD5 = chash::create(algorithm::MD5)) {
+	chash::digest_t Digest;
 
 	if (MD5->init()) {
 		MD5->update((uint8_t*)"abcd", 4);
@@ -75,8 +75,8 @@ if (IAlgorithm* MD5 = createAlgorithm(EAlgorithm::MD5)) {
 
 ### MD4
 ```
-if (IAlgorithm* MD4 = createAlgorithm(EAlgorithm::MD4)) {
-	CDigest Digest;
+if (auto MD4 = chash::create(algorithm::MD4)) {
+	chash::digest_t Digest;
 
 	if (MD4->init()) {
 		MD4->update((uint8_t*)"abcd", 4);
@@ -92,8 +92,8 @@ if (IAlgorithm* MD4 = createAlgorithm(EAlgorithm::MD4)) {
 
 ### RipeMD128
 ```
-if (IAlgorithm* RipeMD128 = createAlgorithm(EAlgorithm::RipeMD128)) {
-	CDigest Digest;
+if (auto RipeMD128 = chash::create(algorithm::RipeMD128)) {
+	chash::digest_t Digest;
 
 	if (RipeMD128->init()) {
 		RipeMD128->update((uint8_t*)"abcd", 4);
@@ -109,8 +109,8 @@ if (IAlgorithm* RipeMD128 = createAlgorithm(EAlgorithm::RipeMD128)) {
 
 ### RipeMD160
 ```
-if (IAlgorithm* RipeMD160 = createAlgorithm(EAlgorithm::RipeMD160)) {
-	CDigest Digest;
+if (auto RipeMD160 = chash::create(algorithm::RipeMD160)) {
+	chash::digest_t Digest;
 
 	if (RipeMD160->init()) {
 		RipeMD160->update((uint8_t*)"abcd", 4);

@@ -2,7 +2,7 @@
 #include "Macros.hpp"
 
 namespace chash {
-	enum class EAlgorithm {
+	enum class algorithm {
 		Unknown		= 0x0000,
 		CRC16		= 0x1000,		// --> IBM Poly-Nomial.
 		CRC32		= 0x1001,		// --> IEEE 802.3
@@ -16,47 +16,47 @@ namespace chash {
 		RipeMD160	= 0x4001,
 	};
 
-	typedef std::vector<uint8_t> CDigest;
+	typedef std::vector<uint8_t> digest_t;
 
 	/* Invalid Algorithm error. */
-	class CInvalidAlgorithmError : public std::runtime_error {
+	class invalid_algorithm_error : public std::runtime_error {
 	public:
-		CInvalidAlgorithmError(const char* _what) 
+		invalid_algorithm_error(const char* _what) 
 			: std::runtime_error(_what)
 		{
 		}
 	};
 
 	/* Invalid State error. */
-	class CInvalidStateError : public std::runtime_error {
+	class invalid_state_error : public std::runtime_error {
 	public:
-		CInvalidStateError(const char* _what)
+		invalid_state_error(const char* _what)
 			: std::runtime_error(_what)
 		{
 		}
 	};
 
 	/* IAlgorithm interface */
-	class IAlgorithm {
+	class hash_function {
 	public:
-		IAlgorithm(EAlgorithm type)
+		hash_function(algorithm type)
 			: _type(type)
 		{ 
 		}
 
-		virtual ~IAlgorithm() { }
+		virtual ~hash_function() { }
 
 	private:
-		EAlgorithm _type;
+		algorithm _type;
 
 	protected:
-		inline void setType(EAlgorithm _type) {
+		inline void setType(algorithm _type) {
 			this->_type = _type;
 		}
 
 	public:
 		/* get algorithm type. */
-		inline EAlgorithm type() const { return _type; }
+		inline algorithm type() const { return _type; }
 
 		/* initiate the algorithm. */
 		virtual bool init() = 0;
@@ -65,10 +65,10 @@ namespace chash {
 		virtual void update(const uint8_t* inBytes, size_t inSize) = 0;
 
 		/* finalize the algorithm and digest. */
-		virtual void finalize(CDigest& outDigest) = 0;
+		virtual void finalize(digest_t& outDigest) = 0;
 		
 		/* compute hash with digest. */
-		virtual bool compute(CDigest& outDigest, const uint8_t* inBytes, size_t inSize) {
+		virtual bool compute(digest_t& outDigest, const uint8_t* inBytes, size_t inSize) {
 			if (init()) {
 				update(inBytes, inSize);
 				finalize(outDigest);
@@ -80,7 +80,7 @@ namespace chash {
 	};
 
 	/* Digest to hex. */
-	inline std::string toHex(const CDigest& inDigest) {
+	inline std::string to_hex(const digest_t& inDigest) {
 		std::string outHex;
 
 		outHex.reserve(inDigest.size() << 1);

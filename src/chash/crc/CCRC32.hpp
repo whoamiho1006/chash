@@ -2,7 +2,7 @@
 #include "chash/IAlgorithm.hpp"
 
 namespace chash {
-	class CHASH_API CCRC32 : public IAlgorithm {
+	class CHASH_API CCRC32 : public hash_function {
 	private:
 		static const uint32_t POLY_NOMIAL = 0x4C11DB7;
 		static constexpr uint32_t INIT_VALUE = 0x00000000;
@@ -20,6 +20,6 @@ namespace chash {
 	public:
 		bool init() override;
 		void update(const uint8_t* inBytes, size_t inSize) override;
-		void finalize(CDigest& outDigest) override;
+		void finalize(digest_t& outDigest) override;
 	};
 }

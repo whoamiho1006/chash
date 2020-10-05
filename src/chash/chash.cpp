@@ -15,55 +15,55 @@
 #include "ripemd/CRipeMD160.hpp"
 
 namespace chash {
-    CHASH_API std::unique_ptr<IAlgorithm> createAlgorithm(EAlgorithm algorithm) {
-		IAlgorithm* instance = nullptr;
+    CHASH_API std::unique_ptr<hash_function> create(algorithm algorithm) {
+		hash_function* instance = nullptr;
 
         switch (algorithm) {
-        case EAlgorithm::CRC16:
+        case algorithm::CRC16:
 			instance = new CCRC16();
 			break;
 
-        case EAlgorithm::CRC32:
+        case algorithm::CRC32:
 			instance = new CCRC32();
 			break;
 
-        case EAlgorithm::CRC64:
+        case algorithm::CRC64:
 			instance = new CCRC64();
 			break;
 
-        case EAlgorithm::SHA256:
+        case algorithm::SHA256:
 			instance = new CSHA256();
 			break;
 
-        case EAlgorithm::SHA384:
+        case algorithm::SHA384:
 			instance = new CSHA384();
 			break;
 
-        case EAlgorithm::SHA512:
+        case algorithm::SHA512:
 			instance = new CSHA512();
 			break;
 
-        case EAlgorithm::MD5:
+        case algorithm::MD5:
 			instance = new CMD5();
 			break;
 
-        case EAlgorithm::MD4:
+        case algorithm::MD4:
 			instance = new CMD4();
 			break;
 
-        case EAlgorithm::RipeMD128:
+        case algorithm::RipeMD128:
 			instance = new CRipeMD128();
 			break;
 
-        case EAlgorithm::RipeMD160:
+        case algorithm::RipeMD160:
 			instance = new CRipeMD160();
 			break;
         }
 
 		if (!instance) {
-			throw CInvalidAlgorithmError("Unknown algorithm!");
+			throw invalid_algorithm_error("Unknown algorithm!");
 		}
 
-        return std::unique_ptr<IAlgorithm>(instance);
+        return std::unique_ptr<hash_function>(instance);
     }
 }

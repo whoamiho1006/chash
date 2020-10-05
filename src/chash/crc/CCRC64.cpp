@@ -2,7 +2,7 @@
 
 namespace chash {
 	CCRC64::CCRC64()
-		: IAlgorithm(EAlgorithm::CRC64), _init(false)
+		: hash_function(algorithm::CRC64), _init(false)
 	{
 	}
 
@@ -34,7 +34,7 @@ namespace chash {
 
 	void CCRC64::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
-			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
         }
 
         while (inSize--) {
@@ -43,9 +43,9 @@ namespace chash {
         }
     }
 
-	void CCRC64::finalize(CDigest& outDigest) {
+	void CCRC64::finalize(digest_t& outDigest) {
 		if (!_init) {
-			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
 
 		outDigest.push_back(uint8_t(_digest >> 56));

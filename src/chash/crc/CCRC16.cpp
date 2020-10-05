@@ -7,7 +7,7 @@ namespace chash {
     };
 
     CCRC16::CCRC16()
-        : IAlgorithm(EAlgorithm::CRC16),
+        : hash_function(algorithm::CRC16),
         _init(0), _digest(0)
     {
     }
@@ -39,7 +39,7 @@ namespace chash {
 
     void CCRC16::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
-			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
         }
 
         while (inSize--) {
@@ -48,9 +48,9 @@ namespace chash {
         }
     }
 
-	void CCRC16::finalize(CDigest& outDigest) {
+	void CCRC16::finalize(digest_t& outDigest) {
 		if (!_init) {
-			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
 
 		_digest ^= FINAL_XOR;

@@ -29,7 +29,7 @@ namespace chash {
     const uint8_t CSHA512::PADDING[128] = { 0x80, 0, };
 
 	CSHA512::CSHA512()
-		: IAlgorithm(EAlgorithm::SHA512), _init(false), _count(0)
+		: hash_function(algorithm::SHA512), _init(false), _count(0)
 	{
 	}
 
@@ -55,7 +55,7 @@ namespace chash {
 
 	void CSHA512::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
-			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
         }
 
         uint32_t pos = uint32_t(_count) & 0x7f;
@@ -71,9 +71,9 @@ namespace chash {
         }
     }
 
-	void CSHA512::finalize(CDigest& outDigest) {
+	void CSHA512::finalize(digest_t& outDigest) {
 		if (!_init) {
-			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
 
 		updateFinal();

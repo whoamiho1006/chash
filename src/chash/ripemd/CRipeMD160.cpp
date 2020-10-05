@@ -25,7 +25,7 @@ namespace chash {
     const uint8_t CRipeMD160::PADDING[64] = { 0x80, 0, };
 
 	CRipeMD160::CRipeMD160()
-		: IAlgorithm(EAlgorithm::RipeMD160), _init(false), _count(0)
+		: hash_function(algorithm::RipeMD160), _init(false), _count(0)
 	{
 	}
 
@@ -48,7 +48,7 @@ namespace chash {
 
     void CRipeMD160::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
-			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
         }
 
         uint32_t pos = uint32_t(_count) & 0x3f;
@@ -64,9 +64,9 @@ namespace chash {
         }
     }
 	
-	void CRipeMD160::finalize(CDigest& outDigest) {
+	void CRipeMD160::finalize(digest_t& outDigest) {
 		if (!_init) {
-			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
 		
 		updateFinal();

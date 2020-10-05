@@ -4,5 +4,5 @@
 #include <memory>
 
 namespace chash {
-	CHASH_API std::unique_ptr<IAlgorithm> createAlgorithm(EAlgorithm algorithm);
+	CHASH_API std::unique_ptr<hash_function> create(algorithm algorithm);
 }

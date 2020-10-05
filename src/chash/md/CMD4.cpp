@@ -14,7 +14,7 @@ namespace chash {
 	const uint8_t CMD4::PADDING[64] = { 0x80, 0, };
 
 	CMD4::CMD4()
-		: IAlgorithm(EAlgorithm::MD4), _init(false), _count(0)
+		: hash_function(algorithm::MD4), _init(false), _count(0)
 	{
 	}
 
@@ -36,7 +36,7 @@ namespace chash {
 
 	void CMD4::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
-			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
 
 		uint32_t pos = uint32_t(_count) & 0x3f;
@@ -52,9 +52,9 @@ namespace chash {
 		}
 	}
 
-	void CMD4::finalize(CDigest& outDigest) {
+	void CMD4::finalize(digest_t& outDigest) {
 		if (!_init) {
-			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
 
 		updateFinal();

@@ -2,7 +2,7 @@
 #include "chash/IAlgorithm.hpp"
 
 namespace chash {
-	class CHASH_API CSHA384 : public IAlgorithm {
+	class CHASH_API CSHA384 : public hash_function {
 	private:
 		static const uint64_t K[128];
 		static const uint8_t PADDING[128];
@@ -20,7 +20,7 @@ namespace chash {
 	public:
 		bool init() override;
 		void update(const uint8_t* inBytes, size_t inSize) override;
-		void finalize(CDigest& outDigest) override;
+		void finalize(digest_t& outDigest) override;
 
 	private:
 		void updateFinal();
