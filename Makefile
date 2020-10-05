@@ -3,16 +3,16 @@ STRIP=strip
 CXXFLAGS=-fPIC --shared
 
 OBJS=src/chash/chash.o \
-	src/chash/crc/CCRC16.o \
-	src/chash/crc/CCRC32.o \
-	src/chash/crc/CCRC64.o \
-	src/chash/md/CMD5.o \
-	src/chash/md/CMD4.o \
-	src/chash/ripemd/CRipeMD128.o \
-	src/chash/ripemd/CRipeMD160.o \
-	src/chash/sha/CSHA256.o \
-	src/chash/sha/CSHA384.o \
-	src/chash/sha/CSHA512.o
+	src/chash/crc/crc16.o \
+	src/chash/crc/crc32.o \
+	src/chash/crc/crc64.o \
+	src/chash/md/md5.o \
+	src/chash/md/md4.o \
+	src/chash/ripemd/ripemd128.o \
+	src/chash/ripemd/ripemd160.o \
+	src/chash/sha/sha256.o \
+	src/chash/sha/sha384.o \
+	src/chash/sha/sha512.o
 
 TARGET=libchash.so
 
