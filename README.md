@@ -19,6 +19,7 @@ if (auto CRC64 = create(algorithm::CRC64)) {
 
 // output: d5fbf74d5ddc3826
 // https://crc64.online/ (ECMA 182, 'abcd'): d5fbf74d5ddc3826
+```
 
 ### CRC32
 This implements CRC-32/BZIP2. (Init: 0xFFFFFFFF, Poly: 0x04C11DB7)
@@ -38,7 +39,6 @@ if (auto CRC32 = create(algorithm::CRC32)) {
 // output: 3D4C334B
 // https://crccalc.com/ (CRC-16/BUYPASS, 'abcd'): 3D4C334B
 ```
-
 
 ### CRC16
 This implements CRC-16/BUYPASS. (Init: 0x0000, Poly: 0x8000)
