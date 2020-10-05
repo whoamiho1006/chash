@@ -21,29 +21,19 @@ namespace chash {
 	/* Invalid Algorithm error. */
 	class CInvalidAlgorithmError : public std::exception {
 	public:
-		CInvalidAlgorithmError(const std::string& _what) 
-			: _what(_what)
+		CInvalidAlgorithmError(const char* _what) 
+			: std::exception(_what)
 		{
 		}
-
-		char const* what() const override { return _what.c_str(); }
-
-	private:
-		std::string _what;
 	};
 
 	/* Invalid State error. */
 	class CInvalidStateError : public std::exception {
 	public:
-		CInvalidStateError(const std::string& _what)
-			: _what(_what)
+		CInvalidStateError(const char* _what)
+			: std::exception(_what)
 		{
 		}
-
-		char const* what() const override { return _what.c_str(); }
-
-	private:
-		std::string _what;
 	};
 
 	/* IAlgorithm interface */
