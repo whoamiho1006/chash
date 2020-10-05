@@ -52,7 +52,7 @@ namespace chash {
 
 	void CSHA256::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
-			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
         }
 
         uint32_t pos = uint32_t(_count) & 0x3f;
@@ -70,7 +70,7 @@ namespace chash {
 
 	void CSHA256::finalize(CDigest& outDigest) {
 		if (!_init) {
-			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
 		}
 
 		updateFinal();

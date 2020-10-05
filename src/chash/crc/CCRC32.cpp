@@ -34,7 +34,7 @@ namespace chash {
 
     void CCRC32::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
-			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
         }
 
         while (inSize--) {
@@ -45,7 +45,7 @@ namespace chash {
 
 	void CCRC32::finalize(CDigest& outDigest) {
 		if (!_init) {
-			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
+			throw CInvalidStateError("Can't perform anything for non-initiated algorithm!");
 		}
 
 		_digest ^= FINAL_XOR;

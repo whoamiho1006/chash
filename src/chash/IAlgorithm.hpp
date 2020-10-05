@@ -19,19 +19,19 @@ namespace chash {
 	typedef std::vector<uint8_t> CDigest;
 
 	/* Invalid Algorithm error. */
-	class CInvalidAlgorithmError : public std::exception {
+	class CInvalidAlgorithmError : public std::runtime_error {
 	public:
-		CInvalidAlgorithmError(...) 
-			: std::exception()
+		CInvalidAlgorithmError(const char* _what) 
+			: std::runtime_error(_what)
 		{
 		}
 	};
 
 	/* Invalid State error. */
-	class CInvalidStateError : public std::exception {
+	class CInvalidStateError : public std::runtime_error {
 	public:
-		CInvalidStateError(...)
-			: std::exception()
+		CInvalidStateError(const char* _what)
+			: std::runtime_error(_what)
 		{
 		}
 	};

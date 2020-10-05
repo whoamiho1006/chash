@@ -61,7 +61,7 @@ namespace chash {
         }
 
 		if (!instance) {
-			throw new CInvalidAlgorithmError("Unknown algorithm!");
+			throw CInvalidAlgorithmError("Unknown algorithm!");
 		}
 
         return std::unique_ptr<IAlgorithm>(instance);
