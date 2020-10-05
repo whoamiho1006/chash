@@ -2,8 +2,62 @@
 Hash algorithm library in C++.
 
 ## examples
-### CRC16/32/64
-Warning: Currently WORK in PROGRESS.
+### CRC64
+This implements CRC-64/ECMA182. (Init: 0x0000000000000000, Poly: 0x42f0e1eba9ea3693)
+```
+if (auto CRC64 = create(algorithm::CRC64)) {
+	digest_t Digest;
+
+	if (CRC64->init()) {
+		CRC64->update((uint8_t*)"abcd", 4);
+		CRC64->finalize(Digest);
+
+		printf("CRC64(abcd): %s\n", to_hex(Digest).c_str());
+		return 0;
+	}
+}
+
+// output: d5fbf74d5ddc3826
+// https://crc64.online/ (ECMA 182, 'abcd'): d5fbf74d5ddc3826
+
+### CRC32
+This implements CRC-32/BZIP2. (Init: 0xFFFFFFFF, Poly: 0x04C11DB7)
+```
+if (auto CRC32 = create(algorithm::CRC32)) {
+	digest_t Digest;
+
+	if (CRC32->init()) {
+		CRC32->update((uint8_t*)"abcd", 4);
+		CRC32->finalize(Digest);
+
+		printf("CRC32(abcd): %s\n", to_hex(Digest).c_str());
+		return 0;
+	}
+}
+
+// output: 3D4C334B
+// https://crccalc.com/ (CRC-16/BUYPASS, 'abcd'): 3D4C334B
+```
+
+
+### CRC16
+This implements CRC-16/BUYPASS. (Init: 0x0000, Poly: 0x8000)
+```
+if (auto CRC16 = create(algorithm::CRC16)) {
+	digest_t Digest;
+
+	if (CRC16->init()) {
+		CRC16->update((uint8_t*)"abcd", 4);
+		CRC16->finalize(Digest);
+
+		printf("CRC16(abcd): %s\n", to_hex(Digest).c_str());
+		return 0;
+	}
+}
+
+// output: 58e7
+// https://crccalc.com/ (CRC-16/BUYPASS, 'abcd'): 58e7
+```
 
 ### SHA-512
 ```

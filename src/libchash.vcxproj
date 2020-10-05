@@ -74,25 +74,25 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)\</IntDir>
+    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)-$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)\</IntDir>
+    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)-$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)\</IntDir>
+    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)-$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)\</IntDir>
+    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)-$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -185,6 +185,8 @@
   <ItemGroup>
     <None Include="..\LICENSE" />
     <None Include="..\Makefile" />
+    <None Include="..\mkdeb.sh" />
+    <None Include="..\package\DEBIAN\control" />
     <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

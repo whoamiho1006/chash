@@ -6,7 +6,7 @@ namespace chash {
 		Unknown		= 0x0000,
 		CRC16		= 0x1000,		// --> IBM Poly-Nomial.
 		CRC32		= 0x1001,		// --> IEEE 802.3
-		CRC64		= 0x1002,		// --> ISO Poly-Nomial.
+		CRC64		= 0x1002,		// --> ECMA 182
 		SHA256		= 0x2000,
 		SHA384		= 0x2001,
 		SHA512		= 0x2002,

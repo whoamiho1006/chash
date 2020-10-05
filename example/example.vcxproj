@@ -74,28 +74,28 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)src\;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)\</IntDir>
+    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)-$(ProjectName)\</IntDir>
     <LibraryPath>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)src\;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)\</IntDir>
+    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)-$(ProjectName)\</IntDir>
     <LibraryPath>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)src\;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)\</IntDir>
+    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)-$(ProjectName)\</IntDir>
     <LibraryPath>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)src\;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\</OutDir>
-    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)\</IntDir>
+    <IntDir>$(SolutionDir)obj/$(Configuration)-$(PlatformTarget)-$(ProjectName)\</IntDir>
     <LibraryPath>$(SolutionDir)bin/$(Configuration)-$(PlatformTarget)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -159,6 +159,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="crc16.cpp" />
+    <ClCompile Include="crc32.cpp" />
+    <ClCompile Include="crc64.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="md4.cpp" />
     <ClCompile Include="md5.cpp" />

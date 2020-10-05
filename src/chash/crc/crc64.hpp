@@ -4,9 +4,9 @@
 namespace chash {
 	class CHASH_API crc64 : public hash_function {
 	private:
-		static const uint32_t POLY_NOMIAL = 0x000000000000001bull;
-		static constexpr uint32_t INIT_VALUE = 0x0000000000000000ull;
-		static constexpr uint32_t FINAL_XOR = 0x0000000000000000ull;
+		static constexpr uint64_t POLY_NOMIAL = 0x42f0e1eba9ea3693ull;
+		static constexpr uint64_t INIT_VALUE = 0x0000000000000000ull;
+		static constexpr uint64_t FINAL_XOR = 0x0000000000000000ull;
 
 	public:
 		crc64();

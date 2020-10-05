@@ -92,10 +92,20 @@
     <Filter Include="chash\ripemd">
       <UniqueIdentifier>{f5846dbc-993b-40a4-926d-f6d3327360d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="package">
+      <UniqueIdentifier>{35ba3730-1253-4ca9-aa4c-d2bf71e5fe2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="package\DEBIAN">
+      <UniqueIdentifier>{605806eb-4e1f-4bd2-98f8-f5ae8ef28ec8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Makefile" />
     <None Include="..\README.md" />
     <None Include="..\LICENSE" />
+    <None Include="..\package\DEBIAN\control">
+      <Filter>package\DEBIAN</Filter>
+    </None>
+    <None Include="..\mkdeb.sh" />
   </ItemGroup>
 </Project>

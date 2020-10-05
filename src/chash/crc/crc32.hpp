@@ -4,7 +4,7 @@
 namespace chash {
 	class CHASH_API crc32 : public hash_function {
 	private:
-		static const uint32_t POLY_NOMIAL = 0x4C11DB7;
+		static constexpr uint32_t POLY_NOMIAL = 0x4C11DB7;
 		static constexpr uint32_t INIT_VALUE = 0xFFFFFFFF;
 		static constexpr uint32_t FINAL_XOR = 0xFFFFFFFF;
 

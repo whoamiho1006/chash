@@ -11,21 +11,20 @@ namespace chash {
             return false;
         }
 
-        uint64_t temp = 0;
         _init = true;
 
-        for (uint64_t i = 0; i < 256; ++i) {
-            temp = (i << 56);
+		for (uint64_t i = 0; i < 256; ++i) {
+			uint64_t c = (i << 56);
 
             for (uint32_t j = 0; j < 8; ++j) {
-                if (temp & 0x8000000000000000ull) {
-                    temp = (temp << 1) ^ POLY_NOMIAL;
+                if ((c & 0x8000000000000000ull) != 0) {
+                    c = (c << 1) ^ POLY_NOMIAL;
                 }
 
-                else temp <<= 1;
+                else c <<= 1;
             }
 
-            _table[i] = temp;
+            _table[i] = c;
         }
 
         _digest = INIT_VALUE;
@@ -38,8 +37,8 @@ namespace chash {
         }
 
         while (inSize--) {
-            uint32_t i = ((_digest >> 56) ^ *inBytes++) & 0xff;
-            _digest = (_digest << 8) ^ _table[i];
+			uint8_t pos = ((_digest >> 56) ^ *inBytes++);
+			_digest = uint64_t((_digest << 8) ^ _table[pos]);
         }
     }
 
