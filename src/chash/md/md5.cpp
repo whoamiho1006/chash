@@ -1,4 +1,4 @@
-#include "CMD5.hpp"
+#include "md5.hpp"
 
 #define S11 7
 #define S12 12
@@ -46,14 +46,14 @@
 }
 
 namespace chash {
-	const uint8_t CMD5::PADDING[64] = { 0x80, 0, };
+	const uint8_t md5::PADDING[64] = { 0x80, 0, };
 
-	CMD5::CMD5()
+	md5::md5()
 		: hash_function(algorithm::MD5), _init(false), _count(0)
 	{
 	}
 
-	bool CMD5::init()
+	bool md5::init()
 	{
 		if (_init) {
 			return false;
@@ -70,7 +70,7 @@ namespace chash {
 		return true;
 	}
 
-	void CMD5::update(const uint8_t* inBytes, size_t inSize) {
+	void md5::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
@@ -88,7 +88,7 @@ namespace chash {
 		}
 	}
 
-	void CMD5::finalize(digest_t& outDigest) {
+	void md5::finalize(digest_t& outDigest) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
@@ -106,7 +106,7 @@ namespace chash {
 		_init = false;
 	}
 
-	void CMD5::updateFinal() {
+	void md5::updateFinal() {
 		uint8_t lenBits[8];
 		uint64_t length = _count << 3;
 		uint32_t index = uint32_t(_count & 0x3f),
@@ -125,7 +125,7 @@ namespace chash {
 		update(lenBits, 8);
 	}
 
-	void CMD5::flush() {
+	void md5::flush() {
 		uint32_t block[16];
 
 		for (int32_t i = 0; i < 16; ++i) {
@@ -139,7 +139,7 @@ namespace chash {
 		transform(block);
 	}
 
-	void CMD5::transform(const uint32_t* data) {
+	void md5::transform(const uint32_t* data) {
 		uint32_t a = _state[0], b = _state[1], c = _state[2], d = _state[3];
 
 		/* Round 1 */

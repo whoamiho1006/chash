@@ -156,31 +156,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="chash\chash.hpp" />
-    <ClInclude Include="chash\crc\CCRC16.hpp" />
-    <ClInclude Include="chash\crc\CCRC32.hpp" />
-    <ClInclude Include="chash\crc\CCRC64.hpp" />
-    <ClInclude Include="chash\IAlgorithm.hpp" />
-    <ClInclude Include="chash\Macros.hpp" />
-    <ClInclude Include="chash\md\CMD4.hpp" />
-    <ClInclude Include="chash\md\CMD5.hpp" />
-    <ClInclude Include="chash\ripemd\CRipeMD128.hpp" />
-    <ClInclude Include="chash\ripemd\CRipeMD160.hpp" />
-    <ClInclude Include="chash\sha\CSHA256.hpp" />
-    <ClInclude Include="chash\sha\CSHA384.hpp" />
-    <ClInclude Include="chash\sha\CSHA512.hpp" />
+    <ClInclude Include="chash\crc\crc16.hpp" />
+    <ClInclude Include="chash\crc\crc32.hpp" />
+    <ClInclude Include="chash\crc\crc64.hpp" />
+    <ClInclude Include="chash\hash_function.hpp" />
+    <ClInclude Include="chash\boilerplate.hpp" />
+    <ClInclude Include="chash\md\md4.hpp" />
+    <ClInclude Include="chash\md\md5.hpp" />
+    <ClInclude Include="chash\ripemd\ripemd128.hpp" />
+    <ClInclude Include="chash\ripemd\ripemd160.hpp" />
+    <ClInclude Include="chash\sha\sha256.hpp" />
+    <ClInclude Include="chash\sha\sha384.hpp" />
+    <ClInclude Include="chash\sha\sha512.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="chash\chash.cpp" />
-    <ClCompile Include="chash\crc\CCRC16.cpp" />
-    <ClCompile Include="chash\crc\CCRC32.cpp" />
-    <ClCompile Include="chash\crc\CCRC64.cpp" />
-    <ClCompile Include="chash\md\CMD4.cpp" />
-    <ClCompile Include="chash\md\CMD5.cpp" />
-    <ClCompile Include="chash\ripemd\CRipeMD128.cpp" />
-    <ClCompile Include="chash\ripemd\CRipeMD160.cpp" />
-    <ClCompile Include="chash\sha\CSHA256.cpp" />
-    <ClCompile Include="chash\sha\CSHA384.cpp" />
-    <ClCompile Include="chash\sha\CSHA512.cpp" />
+    <ClCompile Include="chash\crc\crc16.cpp" />
+    <ClCompile Include="chash\crc\crc32.cpp" />
+    <ClCompile Include="chash\crc\crc64.cpp" />
+    <ClCompile Include="chash\md\md4.cpp" />
+    <ClCompile Include="chash\md\md5.cpp" />
+    <ClCompile Include="chash\ripemd\ripemd128.cpp" />
+    <ClCompile Include="chash\ripemd\ripemd160.cpp" />
+    <ClCompile Include="chash\sha\sha256.cpp" />
+    <ClCompile Include="chash\sha\sha384.cpp" />
+    <ClCompile Include="chash\sha\sha512.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE" />

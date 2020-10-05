@@ -1,78 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="chash\crc\CCRC16.cpp">
-      <Filter>chash\crc</Filter>
-    </ClCompile>
-    <ClCompile Include="chash\crc\CCRC32.cpp">
-      <Filter>chash\crc</Filter>
-    </ClCompile>
-    <ClCompile Include="chash\crc\CCRC64.cpp">
-      <Filter>chash\crc</Filter>
-    </ClCompile>
-    <ClCompile Include="chash\md\CMD4.cpp">
-      <Filter>chash\md</Filter>
-    </ClCompile>
-    <ClCompile Include="chash\md\CMD5.cpp">
-      <Filter>chash\md</Filter>
-    </ClCompile>
-    <ClCompile Include="chash\sha\CSHA256.cpp">
-      <Filter>chash\sha</Filter>
-    </ClCompile>
-    <ClCompile Include="chash\sha\CSHA384.cpp">
-      <Filter>chash\sha</Filter>
-    </ClCompile>
-    <ClCompile Include="chash\sha\CSHA512.cpp">
-      <Filter>chash\sha</Filter>
-    </ClCompile>
-    <ClCompile Include="chash\ripemd\CRipeMD128.cpp">
-      <Filter>chash\ripemd</Filter>
-    </ClCompile>
-    <ClCompile Include="chash\ripemd\CRipeMD160.cpp">
-      <Filter>chash\ripemd</Filter>
-    </ClCompile>
     <ClCompile Include="chash\chash.cpp">
       <Filter>chash</Filter>
     </ClCompile>
+    <ClCompile Include="chash\crc\crc64.cpp">
+      <Filter>chash\crc</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\crc\crc32.cpp">
+      <Filter>chash\crc</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\crc\crc16.cpp">
+      <Filter>chash\crc</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\md\md4.cpp">
+      <Filter>chash\md</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\md\md5.cpp">
+      <Filter>chash\md</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\ripemd\ripemd160.cpp">
+      <Filter>chash\ripemd</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\ripemd\ripemd128.cpp">
+      <Filter>chash\ripemd</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\sha\sha256.cpp">
+      <Filter>chash\sha</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\sha\sha384.cpp">
+      <Filter>chash\sha</Filter>
+    </ClCompile>
+    <ClCompile Include="chash\sha\sha512.cpp">
+      <Filter>chash\sha</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="chash\crc\CCRC64.hpp">
-      <Filter>chash\crc</Filter>
-    </ClInclude>
-    <ClInclude Include="chash\crc\CCRC16.hpp">
-      <Filter>chash\crc</Filter>
-    </ClInclude>
-    <ClInclude Include="chash\crc\CCRC32.hpp">
-      <Filter>chash\crc</Filter>
-    </ClInclude>
-    <ClInclude Include="chash\md\CMD5.hpp">
-      <Filter>chash\md</Filter>
-    </ClInclude>
-    <ClInclude Include="chash\md\CMD4.hpp">
-      <Filter>chash\md</Filter>
-    </ClInclude>
-    <ClInclude Include="chash\sha\CSHA256.hpp">
-      <Filter>chash\sha</Filter>
-    </ClInclude>
-    <ClInclude Include="chash\sha\CSHA384.hpp">
-      <Filter>chash\sha</Filter>
-    </ClInclude>
-    <ClInclude Include="chash\sha\CSHA512.hpp">
-      <Filter>chash\sha</Filter>
-    </ClInclude>
-    <ClInclude Include="chash\ripemd\CRipeMD128.hpp">
-      <Filter>chash\ripemd</Filter>
-    </ClInclude>
-    <ClInclude Include="chash\ripemd\CRipeMD160.hpp">
-      <Filter>chash\ripemd</Filter>
-    </ClInclude>
     <ClInclude Include="chash\chash.hpp">
       <Filter>chash</Filter>
     </ClInclude>
-    <ClInclude Include="chash\IAlgorithm.hpp">
+    <ClInclude Include="chash\crc\crc64.hpp">
+      <Filter>chash\crc</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\crc\crc32.hpp">
+      <Filter>chash\crc</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\crc\crc16.hpp">
+      <Filter>chash\crc</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\md\md4.hpp">
+      <Filter>chash\md</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\md\md5.hpp">
+      <Filter>chash\md</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\ripemd\ripemd160.hpp">
+      <Filter>chash\ripemd</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\ripemd\ripemd128.hpp">
+      <Filter>chash\ripemd</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\sha\sha256.hpp">
+      <Filter>chash\sha</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\sha\sha384.hpp">
+      <Filter>chash\sha</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\sha\sha512.hpp">
+      <Filter>chash\sha</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\hash_function.hpp">
       <Filter>chash</Filter>
     </ClInclude>
-    <ClInclude Include="chash\Macros.hpp">
+    <ClInclude Include="chash\boilerplate.hpp">
       <Filter>chash</Filter>
     </ClInclude>
   </ItemGroup>

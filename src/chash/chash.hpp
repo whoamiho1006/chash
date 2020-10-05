@@ -1,6 +1,6 @@
 #pragma once
-#include "chash/Macros.hpp"
-#include "chash/IAlgorithm.hpp"
+#include "chash/boilerplate.hpp"
+#include "chash/hash_function.hpp"
 #include <memory>
 
 namespace chash {

@@ -1,4 +1,4 @@
-#include "CRipeMD160.hpp"
+#include "ripemd160.hpp"
 #include <string.h>
 
 #define F(x, y, z) ((x) ^ (y) ^ (z))
@@ -22,14 +22,14 @@
 #define JJJ(a, b, c, d, e, x, s) a += J(b, c, d) + (x) + 0x50A28BE6, a = ROTATE_LEFT(a, s) + (e), c = ROTATE_LEFT(c, 10)
 
 namespace chash {
-    const uint8_t CRipeMD160::PADDING[64] = { 0x80, 0, };
+    const uint8_t ripemd160::PADDING[64] = { 0x80, 0, };
 
-	CRipeMD160::CRipeMD160()
+	ripemd160::ripemd160()
 		: hash_function(algorithm::RipeMD160), _init(false), _count(0)
 	{
 	}
 
-	bool CRipeMD160::init() {
+	bool ripemd160::init() {
         if (_init) {
             return false;
         }
@@ -46,7 +46,7 @@ namespace chash {
 		return true;
 	}
 
-    void CRipeMD160::update(const uint8_t* inBytes, size_t inSize) {
+    void ripemd160::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
         }
@@ -64,7 +64,7 @@ namespace chash {
         }
     }
 	
-	void CRipeMD160::finalize(digest_t& outDigest) {
+	void ripemd160::finalize(digest_t& outDigest) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
@@ -82,7 +82,7 @@ namespace chash {
 		_init = false;
 	}
 
-	void CRipeMD160::updateFinal()
+	void ripemd160::updateFinal()
 	{
 		uint8_t lenBits[8];
 		uint64_t length = _count << 3;
@@ -102,7 +102,7 @@ namespace chash {
 		update(lenBits, 8);
 	}
 
-	void CRipeMD160::flush() {
+	void ripemd160::flush() {
         uint32_t block[16];
 
         for (int32_t i = 0; i < 16; ++i) {
@@ -116,7 +116,7 @@ namespace chash {
         transform(block);
     }
 
-    void CRipeMD160::transform(const uint32_t* x) {
+    void ripemd160::transform(const uint32_t* x) {
         //Initialize the working registers
         uint32_t aa = _state[0];
         uint32_t bb = _state[1];

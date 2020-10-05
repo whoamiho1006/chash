@@ -1,14 +1,14 @@
 #pragma once
-#include "chash/IAlgorithm.hpp"
+#include "chash/hash_function.hpp"
 
 namespace chash {
-	class CHASH_API CMD5 : public hash_function {
+	class CHASH_API md4 : public hash_function {
 	private:
 		static const uint8_t PADDING[64];
 
 	public:
-		CMD5();
-		~CMD5() { }
+		md4();
+		~md4() { }
 
 	private:
 		bool		_init;

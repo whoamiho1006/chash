@@ -1,9 +1,9 @@
-#include "CSHA256.hpp"
+#include "sha256.hpp"
 #include <string.h>
 
 namespace chash {
 
-    const uint32_t CSHA256::K[64] = {
+    const uint32_t sha256::K[64] = {
         0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
         0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
         0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
@@ -22,7 +22,7 @@ namespace chash {
         0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
     };
 
-    CSHA256::CSHA256()
+    sha256::sha256()
         : hash_function(algorithm::SHA256), 
           _init(false), _count(0)
     {
@@ -30,7 +30,7 @@ namespace chash {
         ::memset(_buffer, 0, sizeof(_buffer));
     }
 
-    bool CSHA256::init() {
+    bool sha256::init() {
         if (_init) {
             return false;
         }
@@ -50,7 +50,7 @@ namespace chash {
         return true;
     }
 
-	void CSHA256::update(const uint8_t* inBytes, size_t inSize) {
+	void sha256::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
         }
@@ -68,7 +68,7 @@ namespace chash {
         }
     }
 
-	void CSHA256::finalize(digest_t& outDigest) {
+	void sha256::finalize(digest_t& outDigest) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
@@ -86,7 +86,7 @@ namespace chash {
 		_init = false;
 	}
 
-	void CSHA256::updateFinal() {
+	void sha256::updateFinal() {
 		uint64_t lenBits = _count << 3;
 		uint32_t pos = uint32_t(_count) & 0x3f;
 
@@ -110,7 +110,7 @@ namespace chash {
 		flush();
 	}
 
-	void CSHA256::transform(const uint32_t* data)
+	void sha256::transform(const uint32_t* data)
     {
         uint32_t W[16],
             a = _state[0], b = _state[1], c = _state[2],
@@ -146,7 +146,7 @@ namespace chash {
         _state[6] += g; _state[7] += h;
     }
 
-    void CSHA256::flush() {
+    void sha256::flush() {
         uint32_t block[16];
 
         for (int32_t i = 0; i < 16; ++i) {

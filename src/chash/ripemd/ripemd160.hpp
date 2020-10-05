@@ -1,19 +1,19 @@
 #pragma once
-#include "chash/IAlgorithm.hpp"
+#include "chash/hash_function.hpp"
 
 namespace chash {
-	class CHASH_API CRipeMD128 : public hash_function {
+	class CHASH_API ripemd160 : public hash_function {
 	private:
 		static const uint8_t PADDING[64];
 
 	public:
-		CRipeMD128();
-		~CRipeMD128() { }
+		ripemd160();
+		~ripemd160() { }
 
 	private:
 		bool		_init;
 		uint64_t	_count;
-		uint32_t	_state[4];
+		uint32_t	_state[5];
 		uint8_t		_buffer[64];
 
 	public:

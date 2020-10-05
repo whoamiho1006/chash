@@ -1,4 +1,4 @@
-#include "CRipeMD128.hpp"
+#include "ripemd128.hpp"
 #include <string.h>
 
 #define F(x, y, z) ((x) ^ (y) ^ (z))
@@ -19,14 +19,14 @@
 #define III(a, b, c, d, x, s) a += I(b, c, d) + (x) + 0x50A28BE6, a = ROTATE_LEFT(a, s)
 
 namespace chash {
-	const uint8_t CRipeMD128::PADDING[64] = { 0x80, 0, };
+	const uint8_t ripemd128::PADDING[64] = { 0x80, 0, };
 
-	CRipeMD128::CRipeMD128()
+	ripemd128::ripemd128()
 		: hash_function(algorithm::RipeMD128), _init(false), _count(0)
 	{
 	}
 
-	bool CRipeMD128::init() {
+	bool ripemd128::init() {
 		if (_init) {
 			return false;
 		}
@@ -42,7 +42,7 @@ namespace chash {
 		return true;
 	}
 
-	void CRipeMD128::update(const uint8_t* inBytes, size_t inSize) {
+	void ripemd128::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
@@ -60,7 +60,7 @@ namespace chash {
 		}
 	}
 
-	void CRipeMD128::finalize(digest_t& outDigest) {
+	void ripemd128::finalize(digest_t& outDigest) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
@@ -78,7 +78,7 @@ namespace chash {
 		_init = false;
 	}
 
-	void CRipeMD128::updateFinal()
+	void ripemd128::updateFinal()
 	{
 		uint8_t lenBits[8];
 		uint64_t length = _count << 3;
@@ -98,7 +98,7 @@ namespace chash {
 		update(lenBits, 8);
 	}
 
-	void CRipeMD128::flush() {
+	void ripemd128::flush() {
         uint32_t block[16];
 
         for (int32_t i = 0; i < 16; ++i) {
@@ -112,7 +112,7 @@ namespace chash {
         transform(block);
 	}
 
-	void CRipeMD128::transform(const uint32_t* x)
+	void ripemd128::transform(const uint32_t* x)
 	{
         //Initialize the working registers
         uint32_t aa = _state[0];

@@ -1,5 +1,5 @@
 #pragma once
-#include "Macros.hpp"
+#include "chash/boilerplate.hpp"
 
 namespace chash {
 	enum class algorithm {

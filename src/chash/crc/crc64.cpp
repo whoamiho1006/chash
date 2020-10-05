@@ -1,12 +1,12 @@
-#include "CCRC64.hpp"
+#include "crc64.hpp"
 
 namespace chash {
-	CCRC64::CCRC64()
+	crc64::crc64()
 		: hash_function(algorithm::CRC64), _init(false)
 	{
 	}
 
-    bool CCRC64::init() {
+    bool crc64::init() {
         if (_init) {
             return false;
         }
@@ -32,7 +32,7 @@ namespace chash {
         return true;
     }
 
-	void CCRC64::update(const uint8_t* inBytes, size_t inSize) {
+	void crc64::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
         }
@@ -43,7 +43,7 @@ namespace chash {
         }
     }
 
-	void CCRC64::finalize(digest_t& outDigest) {
+	void crc64::finalize(digest_t& outDigest) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}

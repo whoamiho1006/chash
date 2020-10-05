@@ -1,18 +1,18 @@
 #include "chash.hpp"
 
-#include "crc/CCRC16.hpp"
-#include "crc/CCRC32.hpp"
-#include "crc/CCRC64.hpp"
+#include "crc/crc16.hpp"
+#include "crc/crc32.hpp"
+#include "crc/crc64.hpp"
 
-#include "md/CMD5.hpp"
-#include "md/CMD4.hpp"
+#include "md/md5.hpp"
+#include "md/md4.hpp"
 
-#include "sha/CSHA256.hpp"
-#include "sha/CSHA384.hpp"
-#include "sha/CSHA512.hpp"
+#include "sha/sha256.hpp"
+#include "sha/sha384.hpp"
+#include "sha/sha512.hpp"
 
-#include "ripemd/CRipeMD128.hpp"
-#include "ripemd/CRipeMD160.hpp"
+#include "ripemd/ripemd128.hpp"
+#include "ripemd/ripemd160.hpp"
 
 namespace chash {
     CHASH_API std::unique_ptr<hash_function> create(algorithm algorithm) {
@@ -20,43 +20,43 @@ namespace chash {
 
         switch (algorithm) {
         case algorithm::CRC16:
-			instance = new CCRC16();
+			instance = new crc16();
 			break;
 
         case algorithm::CRC32:
-			instance = new CCRC32();
+			instance = new crc32();
 			break;
 
         case algorithm::CRC64:
-			instance = new CCRC64();
+			instance = new crc64();
 			break;
 
         case algorithm::SHA256:
-			instance = new CSHA256();
+			instance = new sha256();
 			break;
 
         case algorithm::SHA384:
-			instance = new CSHA384();
+			instance = new sha384();
 			break;
 
         case algorithm::SHA512:
-			instance = new CSHA512();
+			instance = new sha512();
 			break;
 
         case algorithm::MD5:
-			instance = new CMD5();
+			instance = new md5();
 			break;
 
         case algorithm::MD4:
-			instance = new CMD4();
+			instance = new md4();
 			break;
 
         case algorithm::RipeMD128:
-			instance = new CRipeMD128();
+			instance = new ripemd128();
 			break;
 
         case algorithm::RipeMD160:
-			instance = new CRipeMD160();
+			instance = new ripemd160();
 			break;
         }
 

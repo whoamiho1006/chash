@@ -1,8 +1,8 @@
 #pragma once
-#include "chash/IAlgorithm.hpp"
+#include "chash/hash_function.hpp"
 
 namespace chash {
-	class CHASH_API CCRC16 : public hash_function {
+	class CHASH_API crc16 : public hash_function {
 	private:
 		static constexpr uint16_t POLY_NOMIAL = 0x8005;
 		static constexpr uint16_t INIT_VALUE = 0x0000;
@@ -10,8 +10,8 @@ namespace chash {
 		static const uint16_t TABLE[256];
 
 	public:
-		CCRC16();
-		~CCRC16() { }
+		crc16();
+		~crc16() { }
 
 	private:
 		bool		_init;

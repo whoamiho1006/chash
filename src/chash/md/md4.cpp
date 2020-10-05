@@ -1,4 +1,4 @@
-#include "CMD4.hpp"
+#include "md4.hpp"
 
 #define F(x, y, z) (((x) & (y)) | (~(x) & (z)))
 #define G(x, y, z) (((x) & (y)) | ((x) & (z)) | ((y) & (z)))
@@ -11,14 +11,14 @@
 #define HH(a, b, c, d, x, s) a += H(b, c, d) + (x) + 0x6ED9EBA1, a = ROTATE_LEFT(a, s)
 
 namespace chash {
-	const uint8_t CMD4::PADDING[64] = { 0x80, 0, };
+	const uint8_t md4::PADDING[64] = { 0x80, 0, };
 
-	CMD4::CMD4()
+	md4::md4()
 		: hash_function(algorithm::MD4), _init(false), _count(0)
 	{
 	}
 
-	bool CMD4::init() {
+	bool md4::init() {
 		if (_init) {
 			return false;
 		}
@@ -34,7 +34,7 @@ namespace chash {
 		return true;
 	}
 
-	void CMD4::update(const uint8_t* inBytes, size_t inSize) {
+	void md4::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
@@ -52,7 +52,7 @@ namespace chash {
 		}
 	}
 
-	void CMD4::finalize(digest_t& outDigest) {
+	void md4::finalize(digest_t& outDigest) {
 		if (!_init) {
 			throw invalid_state_error("Can't perform anything for non-initiated algorithm!");
 		}
@@ -70,7 +70,7 @@ namespace chash {
 		_init = false;
 	}
 
-	void CMD4::updateFinal() {
+	void md4::updateFinal() {
 		uint8_t lenBits[8];
 		uint64_t length = _count << 3;
 		uint32_t index = uint32_t(_count & 0x3f),
@@ -89,7 +89,7 @@ namespace chash {
 		update(lenBits, 8);
 	}
 
-	void CMD4::flush() {
+	void md4::flush() {
 		uint32_t block[16];
 
 		for (int32_t i = 0; i < 16; ++i) {
@@ -103,7 +103,7 @@ namespace chash {
 		transform(block);
 	}
 
-	void CMD4::transform(const uint32_t* data) {
+	void md4::transform(const uint32_t* data) {
 		uint32_t a = _state[0];
 		uint32_t b = _state[1];
 		uint32_t c = _state[2];

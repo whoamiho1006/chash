@@ -1,15 +1,15 @@
 #pragma once
-#include "chash/IAlgorithm.hpp"
+#include "chash/hash_function.hpp"
 
 namespace chash {
-	class CHASH_API CCRC64 : public hash_function {
+	class CHASH_API crc64 : public hash_function {
 	private:
 		static const uint32_t POLY_NOMIAL = 0x000000000000001bull;
 		static constexpr uint32_t INIT_VALUE = 0x0000000000000000ull;
 
 	public:
-		CCRC64();
-		~CCRC64() { }
+		crc64();
+		~crc64() { }
 
 	private:
 		bool		_init;
