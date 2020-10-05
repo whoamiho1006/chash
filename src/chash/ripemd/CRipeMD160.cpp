@@ -31,7 +31,6 @@ namespace chash {
 
 	bool CRipeMD160::init() {
         if (_init) {
-            setError(EAlgorithmErrno::InvalidState);
             return false;
         }
 
@@ -44,14 +43,12 @@ namespace chash {
         _count = 0;
 
         ::memset(_buffer, 0, sizeof(_buffer));
-        setError(EAlgorithmErrno::Succeed);
 		return true;
 	}
 
-    bool CRipeMD160::update(const uint8_t* inBytes, size_t inSize) {
-        if (!_init) {
-            setError(EAlgorithmErrno::InvalidState);
-            return false;
+    void CRipeMD160::update(const uint8_t* inBytes, size_t inSize) {
+		if (!_init) {
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
         }
 
         uint32_t pos = uint32_t(_count) & 0x3f;
@@ -65,15 +62,11 @@ namespace chash {
                 flush();
             }
         }
-
-        setError(EAlgorithmErrno::Succeed);
-        return true;
     }
 	
-	bool CRipeMD160::finalize(CDigest& outDigest) {
+	void CRipeMD160::finalize(CDigest& outDigest) {
 		if (!_init) {
-			setError(EAlgorithmErrno::InvalidState);
-			return false;
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
 		}
 		
 		updateFinal();
@@ -87,8 +80,6 @@ namespace chash {
 		}
 
 		_init = false;
-		setError(EAlgorithmErrno::Succeed);
-		return true;
 	}
 
 	void CRipeMD160::updateFinal()

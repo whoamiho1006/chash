@@ -5,7 +5,7 @@ using namespace chash;
 
 int md5()
 {
-	if (IAlgorithm* MD5 = createAlgorithm(EAlgorithm::MD5)) {
+	if (auto MD5 = createAlgorithm(EAlgorithm::MD5)) {
 		CDigest Digest;
 
 		if (MD5->init()) {

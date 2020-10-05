@@ -1,7 +1,7 @@
 #include "chash/IAlgorithm.hpp"
 
 namespace chash {
-	class CMD4 : public IAlgorithm {
+	class CHASH_API CMD4 : public IAlgorithm {
 	private:
 		static const uint8_t PADDING[64];
 
@@ -17,8 +17,8 @@ namespace chash {
 
 	public:
 		bool init() override;
-		bool update(const uint8_t* inBytes, size_t inSize) override;
-		bool finalize(CDigest& outDigest) override;
+		void update(const uint8_t* inBytes, size_t inSize) override;
+		void finalize(CDigest& outDigest) override;
 
 	private:
 		void updateFinal();

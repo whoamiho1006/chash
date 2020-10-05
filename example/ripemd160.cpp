@@ -5,7 +5,7 @@ using namespace chash;
 
 int ripemd160()
 {
-	if (IAlgorithm* RipeMD160 = createAlgorithm(EAlgorithm::RipeMD160)) {
+	if (auto RipeMD160 = createAlgorithm(EAlgorithm::RipeMD160)) {
 		CDigest Digest;
 
 		if (RipeMD160->init()) {

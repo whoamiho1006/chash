@@ -1,8 +1,5 @@
 #pragma once
 #include "Macros.hpp"
-#include <string>
-#include <string.h>
-#include <vector>
 
 namespace chash {
 	enum class EAlgorithm {
@@ -19,19 +16,41 @@ namespace chash {
 		RipeMD160	= 0x4001,
 	};
 
-	enum class EAlgorithmErrno {
-		Succeed = 0,
-		InvalidAlgorithm,
-		InvalidState,
-		//InvalidDigest
-	};
-
 	typedef std::vector<uint8_t> CDigest;
 
+	/* Invalid Algorithm error. */
+	class CInvalidAlgorithmError : public std::exception {
+	public:
+		CInvalidAlgorithmError(const std::string& _what) 
+			: _what(_what)
+		{
+		}
+
+		char const* what() const override { return _what.c_str(); }
+
+	private:
+		std::string _what;
+	};
+
+	/* Invalid State error. */
+	class CInvalidStateError : public std::exception {
+	public:
+		CInvalidStateError(const std::string& _what)
+			: _what(_what)
+		{
+		}
+
+		char const* what() const override { return _what.c_str(); }
+
+	private:
+		std::string _what;
+	};
+
+	/* IAlgorithm interface */
 	class IAlgorithm {
 	public:
 		IAlgorithm(EAlgorithm type)
-			: _type(type), _errno(EAlgorithmErrno::Succeed)
+			: _type(type)
 		{ 
 		}
 
@@ -39,41 +58,34 @@ namespace chash {
 
 	private:
 		EAlgorithm _type;
-		EAlgorithmErrno _errno;
 
 	protected:
 		inline void setType(EAlgorithm _type) {
 			this->_type = _type;
 		}
 
-		inline void setError(EAlgorithmErrno _errno) {
-			this->_errno = _errno;
-		}
-
 	public:
 		/* get algorithm type. */
 		inline EAlgorithm type() const { return _type; }
-
-		/* get algorithm state. */
-		inline EAlgorithmErrno error() const { return _errno; }
 
 		/* initiate the algorithm. */
 		virtual bool init() = 0;
 
 		/* update the algorithm state by given bytes. */
-		virtual bool update(const uint8_t* inBytes, size_t inSize) = 0;
+		virtual void update(const uint8_t* inBytes, size_t inSize) = 0;
 
 		/* finalize the algorithm and digest. */
-		virtual bool finalize(CDigest& outDigest) = 0;
+		virtual void finalize(CDigest& outDigest) = 0;
 		
 		/* compute hash with digest. */
-		virtual EAlgorithmErrno compute(CDigest& outDigest, const uint8_t* inBytes, size_t inSize) {
+		virtual bool compute(CDigest& outDigest, const uint8_t* inBytes, size_t inSize) {
 			if (init()) {
 				update(inBytes, inSize);
 				finalize(outDigest);
+				return true;
 			}
 
-			return error();
+			return false;
 		}
 	};
 
@@ -94,24 +106,5 @@ namespace chash {
 		}
 
 		return outHex;
-	}
-
-	/* Comparator between two CDigests. */
-	inline bool operator ==(const CDigest& left, const CDigest& right) {
-		if (left.size() == right.size()) {
-			return !::memcmp(&left[0], &right[0], left.size());
-		}
-
-		return false;
-	}
-
-
-	/* Comparator between two CDigests. */
-	inline bool operator !=(const CDigest& left, const CDigest& right) {
-		if (left.size() == right.size()) {
-			return ::memcmp(&left[0], &right[0], left.size());
-		}
-
-		return true;
 	}
 }

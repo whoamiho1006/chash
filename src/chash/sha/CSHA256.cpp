@@ -1,34 +1,6 @@
 #include "CSHA256.hpp"
 #include <string.h>
 
-#define ROTATE_LEFT(x, n) (((x) << (n)) | ((x) >> (32 - (n))))  
-#define ROTATE_RIGHT(x, n) (((x) >> (n)) | ((x) << (32 - (n))))  
-
-#define S0(x) (ROTATE_RIGHT(x, 2) ^ ROTATE_RIGHT(x,13) ^ ROTATE_RIGHT(x, 22))  
-#define S1(x) (ROTATE_RIGHT(x, 6) ^ ROTATE_RIGHT(x,11) ^ ROTATE_RIGHT(x, 25))  
-#define s0(x) (ROTATE_RIGHT(x, 7) ^ ROTATE_RIGHT(x,18) ^ (x >> 3))  
-#define s1(x) (ROTATE_RIGHT(x,17) ^ ROTATE_RIGHT(x,19) ^ (x >> 10))  
-
-#define __BLK0(i) (W[i] = data[i])  
-#define __BLK2(i) (W[i&15] += s1(W[(i-2)&15]) + W[(i-7)&15] + s0(W[(i-15)&15]))  
-
-#define __Ch(x,y,z) (z^(x&(y^z)))  
-#define __Maj(x,y,z) ((x&y)|(z&(x|y)))  
-
-#define R(a,b,c,d,e,f,g,h, i) \
-    h += S1(e) + __Ch(e,f,g) + K[i+j] + (j?__BLK2(i):__BLK0(i)); \
-    d += h; h += S0(a) + __Maj(a, b, c)
-
-#define RX_8(i) \
-    R(a, b, c, d, e, f, g, h, i); \
-    R(h, a, b, c, d, e, f, g, i + 1); \
-    R(g, h, a, b, c, d, e, f, i + 2); \
-    R(f, g, h, a, b, c, d, e, i + 3); \
-    R(e, f, g, h, a, b, c, d, i + 4); \
-    R(d, e, f, g, h, a, b, c, i + 5); \
-    R(c, d, e, f, g, h, a, b, i + 6); \
-    R(b, c, d, e, f, g, h, a, i + 7)
-
 namespace chash {
 
     const uint32_t CSHA256::K[64] = {
@@ -60,7 +32,6 @@ namespace chash {
 
     bool CSHA256::init() {
         if (_init) {
-            setError(EAlgorithmErrno::InvalidState);
             return false;
         }
 
@@ -76,14 +47,12 @@ namespace chash {
         _count = 0;
 
         ::memset(_buffer, 0, sizeof(_buffer));
-        setError(EAlgorithmErrno::Succeed);
         return true;
     }
 
-    bool CSHA256::update(const uint8_t* inBytes, size_t inSize) {
-        if (!_init) {
-            setError(EAlgorithmErrno::InvalidState);
-            return false;
+	void CSHA256::update(const uint8_t* inBytes, size_t inSize) {
+		if (!_init) {
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
         }
 
         uint32_t pos = uint32_t(_count) & 0x3f;
@@ -97,15 +66,11 @@ namespace chash {
                 flush();
             }
         }
-
-        setError(EAlgorithmErrno::Succeed);
-        return true;
     }
 
-	bool CSHA256::finalize(CDigest& outDigest) {
+	void CSHA256::finalize(CDigest& outDigest) {
 		if (!_init) {
-			setError(EAlgorithmErrno::InvalidState);
-			return false;
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
 		}
 
 		updateFinal();
@@ -118,8 +83,7 @@ namespace chash {
 			outDigest.push_back(uint8_t(_state[i]));
 		}
 
-		setError(EAlgorithmErrno::Succeed);
-		return true;
+		_init = false;
 	}
 
 	void CSHA256::updateFinal() {
@@ -153,6 +117,25 @@ namespace chash {
             d = _state[3], e = _state[4], f = _state[5],
             g = _state[6], h = _state[7],
             j;
+
+#define __Ch(x,y,z) (z^(x&(y^z)))  
+#define __Maj(x,y,z) ((x&y)|(z&(x|y)))  
+
+#define R(a,b,c,d,e,f,g,h, i) \
+    h += sigma2(e) + __Ch(e,f,g) + K[i+j] + (j ? \
+		(W[i & 15] += sigma4(W[(i-2) & 15]) + W[(i-7) & 15] + sigma3(W[(i-15) & 15])) : \
+		 W[i] = data[i]); \
+    d += h; h += sigma1(a) + __Maj(a, b, c)
+
+#define RX_8(i) \
+    R(a, b, c, d, e, f, g, h, i); \
+    R(h, a, b, c, d, e, f, g, i + 1); \
+    R(g, h, a, b, c, d, e, f, i + 2); \
+    R(f, g, h, a, b, c, d, e, i + 3); \
+    R(e, f, g, h, a, b, c, d, i + 4); \
+    R(d, e, f, g, h, a, b, c, i + 5); \
+    R(c, d, e, f, g, h, a, b, i + 6); \
+    R(b, c, d, e, f, g, h, a, i + 7)
 
         for (j = 0; j < 64; j += 16) {
             RX_8(0); RX_8(8);

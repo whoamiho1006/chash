@@ -8,7 +8,6 @@ namespace chash {
 
     bool CCRC64::init() {
         if (_init) {
-            setError(EAlgorithmErrno::InvalidState);
             return false;
         }
 
@@ -30,29 +29,23 @@ namespace chash {
         }
 
         _digest = INIT_VALUE;
-        setError(EAlgorithmErrno::Succeed);
         return true;
     }
 
-    bool CCRC64::update(const uint8_t* inBytes, size_t inSize) {
-        if (!_init) {
-            setError(EAlgorithmErrno::InvalidState);
-            return false;
+	void CCRC64::update(const uint8_t* inBytes, size_t inSize) {
+		if (!_init) {
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
         }
 
         while (inSize--) {
             uint32_t i = ((_digest >> 56) ^ *inBytes++) & 0xff;
             _digest = (_digest << 8) ^ _table[i];
         }
-
-        setError(EAlgorithmErrno::Succeed);
-        return true;
     }
 
-	bool CCRC64::finalize(CDigest& outDigest) {
+	void CCRC64::finalize(CDigest& outDigest) {
 		if (!_init) {
-			setError(EAlgorithmErrno::InvalidState);
-			return false;
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
 		}
 
 		outDigest.push_back(uint8_t(_digest >> 56));
@@ -65,7 +58,5 @@ namespace chash {
 		outDigest.push_back(uint8_t(_digest));
 
 		_init = false;
-		setError(EAlgorithmErrno::Succeed);
-		return true;
 	}
 }

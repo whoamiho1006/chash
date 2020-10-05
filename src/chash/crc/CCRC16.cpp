@@ -14,7 +14,6 @@ namespace chash {
 
     bool CCRC16::init() {
         if (_init) {
-            setError(EAlgorithmErrno::InvalidState);
             return false;
         }
 
@@ -35,29 +34,23 @@ namespace chash {
         }
 
         _digest = INIT_VALUE;
-        setError(EAlgorithmErrno::Succeed);
         return true;
     }
 
-    bool CCRC16::update(const uint8_t* inBytes, size_t inSize) {
-        if (!_init) {
-            setError(EAlgorithmErrno::InvalidState);
-            return false;
+    void CCRC16::update(const uint8_t* inBytes, size_t inSize) {
+		if (!_init) {
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
         }
 
         while (inSize--) {
             uint8_t pos = (_digest >> 8) ^ *inBytes++;
             _digest = uint16_t((_digest << 8) ^ _table[pos]);
         }
-
-        setError(EAlgorithmErrno::Succeed);
-        return true;
     }
 
-	bool CCRC16::finalize(CDigest& outDigest) {
+	void CCRC16::finalize(CDigest& outDigest) {
 		if (!_init) {
-			setError(EAlgorithmErrno::InvalidState);
-			return false;
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
 		}
 
 		_digest ^= FINAL_XOR;
@@ -65,7 +58,5 @@ namespace chash {
 		outDigest.push_back(uint8_t(_digest));
 
 		_init = false;
-		setError(EAlgorithmErrno::Succeed);
-		return true;
 	}
 }

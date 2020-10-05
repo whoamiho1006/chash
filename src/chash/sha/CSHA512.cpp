@@ -1,18 +1,6 @@
 #include "CSHA512.hpp"
 #include <string.h>
 
-#define W(t) w[(t) & 0x0F]
-#define CH(x, y, z) (((x) & (y)) | (~(x) & (z)))
-#define MAJ(x, y, z) (((x) & (y)) | ((x) & (z)) | ((y) & (z)))
-
-#define ROTATE_RIGHT(x, n) (((x) >> (n)) | ((x) << (64 - (n))))  
-#define SHIFT_RIGHT(a, n)   ((a) >> (n))
-
-#define SIGMA1(x) (ROTATE_RIGHT(x, 28) ^ ROTATE_RIGHT(x, 34) ^ ROTATE_RIGHT(x, 39))
-#define SIGMA2(x) (ROTATE_RIGHT(x, 14) ^ ROTATE_RIGHT(x, 18) ^ ROTATE_RIGHT(x, 41))
-#define SIGMA3(x) (ROTATE_RIGHT(x, 1) ^ ROTATE_RIGHT(x, 8) ^ SHIFT_RIGHT(x, 7))
-#define SIGMA4(x) (ROTATE_RIGHT(x, 19) ^ ROTATE_RIGHT(x, 61) ^ SHIFT_RIGHT(x, 6))
-
 namespace chash {
 
     const uint64_t CSHA512::K[128] = {
@@ -47,7 +35,6 @@ namespace chash {
 
 	bool CSHA512::init() {
         if (_init) {
-            setError(EAlgorithmErrno::InvalidState);
             return false;
         }
 
@@ -63,14 +50,12 @@ namespace chash {
         _count = 0;
 
         ::memset(_buffer, 0, sizeof(_buffer));
-        setError(EAlgorithmErrno::Succeed);
         return true;
 	}
 
-    bool CSHA512::update(const uint8_t* inBytes, size_t inSize) {
-        if (!_init) {
-            setError(EAlgorithmErrno::InvalidState);
-            return false;
+	void CSHA512::update(const uint8_t* inBytes, size_t inSize) {
+		if (!_init) {
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
         }
 
         uint32_t pos = uint32_t(_count) & 0x7f;
@@ -84,15 +69,11 @@ namespace chash {
                 flush();
             }
         }
-
-        setError(EAlgorithmErrno::Succeed);
-        return true;
     }
 
-	bool CSHA512::finalize(CDigest& outDigest) {
+	void CSHA512::finalize(CDigest& outDigest) {
 		if (!_init) {
-			setError(EAlgorithmErrno::InvalidState);
-			return false;
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
 		}
 
 		updateFinal();
@@ -109,8 +90,7 @@ namespace chash {
 			outDigest.push_back(uint8_t(_state[i]));
 		}
 
-		setError(EAlgorithmErrno::Succeed);
-		return true;
+		_init = false;
 	}
 
 	void CSHA512::updateFinal()
@@ -168,16 +148,20 @@ namespace chash {
         uint64_t g = _state[6];
         uint64_t h = _state[7];
 
+#define W(t) w[(t) & 0x0F]
+#define CH(x, y, z) (((x) & (y)) | (~(x) & (z)))
+#define MAJ(x, y, z) (((x) & (y)) | ((x) & (z)) | ((y) & (z)))
+
         //SHA-512 hash computation (alternate method)
         for (t = 0; t < 80; t++)
         {
             //Prepare the message schedule
             if (t >= 16)
-                W(t) += SIGMA4(W(t + 14)) + W(t + 9) + SIGMA3(W(t + 1));
+                W(t) += sigma4(W(t + 14)) + W(t + 9) + sigma3(W(t + 1));
 
             //Calculate T1 and T2
-            temp1 = h + SIGMA2(e) + CH(e, f, g) + K[t] + W(t);
-            temp2 = SIGMA1(a) + MAJ(a, b, c);
+            temp1 = h + sigma2(e) + CH(e, f, g) + K[t] + W(t);
+            temp2 = sigma1(a) + MAJ(a, b, c);
 
             //Update the working registers
             h = g;

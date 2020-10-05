@@ -6,7 +6,7 @@ using namespace chash;
 int sha256()
 {
 
-	if (IAlgorithm* SHA256 = createAlgorithm(EAlgorithm::SHA256)) {
+	if (auto SHA256 = createAlgorithm(EAlgorithm::SHA256)) {
 		CDigest Digest;
 
 		if (SHA256->init()) {

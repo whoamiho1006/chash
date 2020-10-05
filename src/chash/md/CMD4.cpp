@@ -18,10 +18,8 @@ namespace chash {
 	{
 	}
 
-	bool CMD4::init()
-	{
+	bool CMD4::init() {
 		if (_init) {
-			setError(EAlgorithmErrno::InvalidState);
 			return false;
 		}
 
@@ -33,14 +31,12 @@ namespace chash {
 		_state[3] = 0x10325476;
 
 		_count = 0;
-		setError(EAlgorithmErrno::Succeed);
 		return true;
 	}
 
-	bool CMD4::update(const uint8_t* inBytes, size_t inSize) {
+	void CMD4::update(const uint8_t* inBytes, size_t inSize) {
 		if (!_init) {
-			setError(EAlgorithmErrno::InvalidState);
-			return false;
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
 		}
 
 		uint32_t pos = uint32_t(_count) & 0x3f;
@@ -54,15 +50,11 @@ namespace chash {
 				flush();
 			}
 		}
-
-		setError(EAlgorithmErrno::Succeed);
-		return true;
 	}
 
-	bool CMD4::finalize(CDigest& outDigest) {
+	void CMD4::finalize(CDigest& outDigest) {
 		if (!_init) {
-			setError(EAlgorithmErrno::InvalidState);
-			return false;
+			throw new CInvalidStateError("Can't perform anything for non-initiated algorithm!");
 		}
 
 		updateFinal();
@@ -76,8 +68,6 @@ namespace chash {
 		}
 
 		_init = false;
-		setError(EAlgorithmErrno::Succeed);
-		return true;
 	}
 
 	void CMD4::updateFinal() {
