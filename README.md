@@ -1,5 +1,6 @@
 # chash
 Hash algorithm library in C++.
+
 ![C/C++ CI](https://github.com/whoamiho1006/chash/workflows/C/C++%20CI/badge.svg)
 
 ## code reviews
