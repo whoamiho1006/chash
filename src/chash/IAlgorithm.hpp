@@ -21,8 +21,8 @@ namespace chash {
 	/* Invalid Algorithm error. */
 	class CInvalidAlgorithmError : public std::exception {
 	public:
-		CInvalidAlgorithmError(const char* _what) 
-			: std::exception(_what)
+		CInvalidAlgorithmError(...) 
+			: std::exception()
 		{
 		}
 	};
@@ -30,8 +30,8 @@ namespace chash {
 	/* Invalid State error. */
 	class CInvalidStateError : public std::exception {
 	public:
-		CInvalidStateError(const char* _what)
-			: std::exception(_what)
+		CInvalidStateError(...)
+			: std::exception()
 		{
 		}
 	};
