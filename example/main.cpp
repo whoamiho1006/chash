@@ -11,6 +11,11 @@ int sha256();
 int crc16();
 int crc32();
 int crc64();
+int hmac_md5();
+int hmac_sha256();
+int hmac_sha384();
+int hmac_sha512();
+int hmac_ripemd160();
 
 int main() {
 	md4();
@@ -20,4 +25,9 @@ int main() {
 	crc16();
 	crc32();
 	crc64();
+	hmac_md5();
+	hmac_sha256();
+	hmac_sha384();
+	hmac_sha512();
+	hmac_ripemd160();
 }

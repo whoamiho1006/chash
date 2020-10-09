@@ -49,14 +49,12 @@ namespace chash {
 	private:
 		algorithm _type;
 
-	protected:
-		inline void setType(algorithm _type) {
-			this->_type = _type;
-		}
-
 	public:
 		/* get algorithm type. */
 		inline algorithm type() const { return _type; }
+
+		/* bit width of this algorithm. */
+		virtual size_t width() const = 0;
 
 		/* initiate the algorithm. */
 		virtual bool init() = 0;

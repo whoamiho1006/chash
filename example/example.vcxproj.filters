@@ -9,6 +9,11 @@
     <ClCompile Include="crc16.cpp" />
     <ClCompile Include="crc32.cpp" />
     <ClCompile Include="crc64.cpp" />
+    <ClCompile Include="hmac_md5.cpp" />
+    <ClCompile Include="hmac_sha256.cpp" />
+    <ClCompile Include="hmac_sha384.cpp" />
+    <ClCompile Include="hmac_sha512.cpp" />
+    <ClCompile Include="hmac_ripemd160.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Makefile" />

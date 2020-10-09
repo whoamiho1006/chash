@@ -2,6 +2,120 @@
 Hash algorithm library in C++.
 
 ## examples
+### HMAC RipeMD160
+This implements HMAC-RipeMD160.
+```
+if (auto hmac = create_hmac(algorithm::RipeMD160)) {
+	digest_t Digest;
+
+	if (hmac->init((uint8_t*)"1234", 4)) {
+		hmac->update((uint8_t*)"abcd", 4);
+		hmac->finalize(Digest);
+
+		printf("HMAC RipeMD160(abcd, 1234): %s\n", to_hex(Digest).c_str());
+		return 0;
+	}
+}
+
+// output: ef855c2fa4fc56e2b341a5ef0044d3c7a21f4508
+// hash_hmac('ripemd160', 'abcd', '1234'): ef855c2fa4fc56e2b341a5ef0044d3c7a21f4508
+```
+
+### HMAC MD5
+This implements HMAC-MD5.
+```
+if (auto hmac = create_hmac(algorithm::MD5)) {
+	digest_t Digest;
+
+	if (hmac->init((uint8_t*)"1234", 4)) {
+		hmac->update((uint8_t*)"abcd", 4);
+		hmac->finalize(Digest);
+
+		printf("HMAC MD5(abcd, 1234): %s\n", to_hex(Digest).c_str());
+		return 0;
+	}
+}
+
+// output: a825764f8c87475b652411748b011a11
+// hash_hmac('md5', 'abcd', '1234'): a825764f8c87475b652411748b011a11
+```
+
+### HMAC MD4
+This implements HMAC-MD4.
+```
+if (auto hmac = create_hmac(algorithm::MD4)) {
+	digest_t Digest;
+
+	if (hmac->init((uint8_t*)"1234", 4)) {
+		hmac->update((uint8_t*)"abcd", 4);
+		hmac->finalize(Digest);
+
+		printf("HMAC MD4(abcd, 1234): %s\n", to_hex(Digest).c_str());
+		return 0;
+	}
+}
+
+// output: 27c706484c8b1c80af3f7bffa061253c
+// hash_hmac('md4', 'abcd', '1234'): 27c706484c8b1c80af3f7bffa061253c
+```
+
+### HMAC SHA256
+This implements HMAC-SHA256.
+```
+if (auto hmac = create_hmac(algorithm::SHA256)) {
+	digest_t Digest;
+
+	if (hmac->init((uint8_t*)"1234", 4)) {
+		hmac->update((uint8_t*)"abcd", 4);
+		hmac->finalize(Digest);
+
+		printf("HMAC SHA256(abcd, 1234): %s\n", to_hex(Digest).c_str());
+		return 0;
+	}
+}
+
+// output: 30001ecb4a1a73fc66a1c23d62a6ca71009e3c879f07cd91444205f968a2ec60
+// hash_hmac('sha256', 'abcd', '1234'): 30001ecb4a1a73fc66a1c23d62a6ca71009e3c879f07cd91444205f968a2ec60
+```
+
+### HMAC SHA384
+This implements HMAC-SHA384.
+```
+if (auto hmac = create_hmac(algorithm::SHA384)) {
+	digest_t Digest;
+
+	if (hmac->init((uint8_t*)"1234", 4)) {
+		hmac->update((uint8_t*)"abcd", 4);
+		hmac->finalize(Digest);
+
+		printf("HMAC SHA384(abcd, 1234): %s\n", to_hex(Digest).c_str());
+		return 0;
+	}
+}
+
+// output: 0dd3df3e1eb9bbf561cd722089a86e234cc3cc5bdecf0ddc66976230b51bf964b790657c4831608aae99722cb6656d02
+// hash_hmac('sha384', 'abcd', '1234'): 0dd3df3e1eb9bbf561cd722089a86e234cc3cc5bdecf0ddc66976230b51bf964b790657c4831608aae99722cb6656d02
+```
+
+### HMAC SHA512
+This implements HMAC-SHA512.
+```
+if (auto hmac = create_hmac(algorithm::SHA512)) {
+	digest_t Digest;
+
+	if (hmac->init((uint8_t*)"1234", 4)) {
+		hmac->update((uint8_t*)"abcd", 4);
+		hmac->finalize(Digest);
+
+		printf("HMAC SHA512(abcd, 1234): %s\n", to_hex(Digest).c_str());
+		return 0;
+	}
+}
+
+// output: 027139211cafddcf5034d816ff5a3491349d6c7a03e63662e5d47e2f39578c7a311935da78cf010da99d411a07f8f4dbcff8561a037faf03ef3703f4ad380b99
+// hash_hmac('sha512', 'abcd', '1234'): 027139211cafddcf5034d816ff5a3491349d6c7a03e63662e5d47e2f39578c7a311935da78cf010da99d411a07f8f4dbcff8561a037faf03ef3703f4ad380b99
+```
+
 ### CRC64
 This implements CRC-64/ECMA182. (Init: 0x0000000000000000, Poly: 0x42f0e1eba9ea3693)
 ```

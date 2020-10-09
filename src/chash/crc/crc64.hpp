@@ -18,6 +18,7 @@ namespace chash {
 		uint64_t	_digest;
 
 	public:
+		size_t width() const override { return 64; }
 		bool init() override;
 		void update(const uint8_t* inBytes, size_t inSize) override;
 		void finalize(digest_t& outDigest) override;

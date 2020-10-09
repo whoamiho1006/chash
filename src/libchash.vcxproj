@@ -161,6 +161,12 @@
     <ClInclude Include="chash\crc\crc64.hpp" />
     <ClInclude Include="chash\hash_function.hpp" />
     <ClInclude Include="chash\boilerplate.hpp" />
+    <ClInclude Include="chash\hmac\hmac_crc.hpp" />
+    <ClInclude Include="chash\hmac\hmac_impl.hpp" />
+    <ClInclude Include="chash\hmac\hmac_md.hpp" />
+    <ClInclude Include="chash\hmac\hmac_ripemd.hpp" />
+    <ClInclude Include="chash\hmac\hmac_sha.hpp" />
+    <ClInclude Include="chash\hmac_function.hpp" />
     <ClInclude Include="chash\md\md4.hpp" />
     <ClInclude Include="chash\md\md5.hpp" />
     <ClInclude Include="chash\ripemd\ripemd128.hpp" />

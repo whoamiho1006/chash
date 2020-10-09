@@ -75,6 +75,24 @@
     <ClInclude Include="chash\boilerplate.hpp">
       <Filter>chash</Filter>
     </ClInclude>
+    <ClInclude Include="chash\hmac_function.hpp">
+      <Filter>chash</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\hmac\hmac_impl.hpp">
+      <Filter>chash\hmac</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\hmac\hmac_md.hpp">
+      <Filter>chash\hmac</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\hmac\hmac_sha.hpp">
+      <Filter>chash\hmac</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\hmac\hmac_ripemd.hpp">
+      <Filter>chash\hmac</Filter>
+    </ClInclude>
+    <ClInclude Include="chash\hmac\hmac_crc.hpp">
+      <Filter>chash\hmac</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="chash">
@@ -97,6 +115,9 @@
     </Filter>
     <Filter Include="package\DEBIAN">
       <UniqueIdentifier>{605806eb-4e1f-4bd2-98f8-f5ae8ef28ec8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chash\hmac">
+      <UniqueIdentifier>{da0ddfa6-b96c-4410-8209-c54028bc5d45}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
