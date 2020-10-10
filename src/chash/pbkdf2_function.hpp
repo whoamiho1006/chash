@@ -1,6 +1,7 @@
 #pragma once
-#include "chash/hash_function.hpp"
+#include "chash/boilerplate.hpp"
 #include "chash/hmac_function.hpp"
+#include <memory>
 
 namespace chash {
 	typedef std::unique_ptr<hmac_function> hmac_ptr;
