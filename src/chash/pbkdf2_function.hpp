@@ -23,7 +23,7 @@ namespace chash {
 			const uint8_t* salt, size_t salt_length,
 			const size_t iteration, const size_t key_length)
 		{
-			digest_t pass1, pass2;
+			digest_t pass1, pass2, last;
 
 			size_t counter = 1;
 			size_t gen_key = 0;
@@ -46,19 +46,21 @@ namespace chash {
 				pass1.clear();
 				hmac->finalize(pass1);
 
+				last = pass1;
+
 				for (size_t i = 1; i < iteration; ++i) {
 					if (!hmac->init(passwd, passwd_length)) {
 						throw invalid_state_error("HMAC algorithm couldn't be initiated.");
 					}
 
-					hmac->update(&pass1[0], pass1.size());
-
-					pass2.clear();
+					hmac->update(&last[0], last.size());
 					hmac->finalize(pass2);
 
 					for (size_t j = 0; j < pass2.size(); j++) {
 						pass1[j] ^= pass2[j];
 					}
+
+					last = std::move(pass2);
 				}
 
 				size_t key_bytes = minVal(key_length - gen_key, pass1.size());

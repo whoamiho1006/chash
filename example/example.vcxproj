@@ -170,7 +170,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="md4.cpp" />
     <ClCompile Include="md5.cpp" />
-    <ClCompile Include="pbkdf2.cpp" />
+    <ClCompile Include="pbkdf2_hmac_sha256.cpp" />
     <ClCompile Include="ripemd160.cpp" />
     <ClCompile Include="sha256.cpp" />
   </ItemGroup>

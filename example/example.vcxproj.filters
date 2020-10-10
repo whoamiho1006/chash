@@ -14,7 +14,7 @@
     <ClCompile Include="hmac_sha384.cpp" />
     <ClCompile Include="hmac_sha512.cpp" />
     <ClCompile Include="hmac_ripemd160.cpp" />
-    <ClCompile Include="pbkdf2.cpp" />
+    <ClCompile Include="pbkdf2_hmac_sha256.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Makefile" />

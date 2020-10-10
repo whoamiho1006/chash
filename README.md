@@ -10,6 +10,63 @@ Hash algorithm library in C++.
 Thank you so much, G. Sliepen!
 
 ## examples
+### PBKDF2 HMAC SHA-256
+This implements PBKDF2 HMAC SHA-256.
+```
+pbkdf2_function pbkdf2(create_hmac(algorithm::SHA256));
+digest_t gen_key;
+
+pbkdf2.gen(gen_key,
+	(uint8_t*)"1234", 4,
+	(uint8_t*)"salt", 4,
+	4, 32);
+
+printf("PBKDF2 HMAC SHA256(1234, salt, 32): %s\n", to_hex(gen_key).c_str());
+
+// output: d7da31cabfe509d02320eae72af619a2ee3a5dc19f02cfe53d8e200bd49f81ef
+// php implementation: d7da31cabfe509d02320eae72af619a2ee3a5dc19f02cfe53d8e200bd49f81ef
+```
+
+Below is test script in PHP.
+```
+<?php
+// https://www.php.net/manual/en/function.hash-hmac.php
+// Here is an efficient PBDKF2 implementation:
+
+function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output = false)
+{
+    $algorithm = strtolower($algorithm);
+    if(!in_array($algorithm, hash_algos(), true))
+		return false;
+	
+    if($count <= 0 || $key_length <= 0)
+        return false;
+
+    $hash_length = strlen(hash($algorithm, "", true));
+    $block_count = ceil($key_length / $hash_length);
+
+    $output = "";
+    for($i = 1; $i <= $block_count; $i++) {
+        // $i encoded as 4 bytes, big endian.
+        $last = $salt . pack("N", $i);
+        // first iteration
+        $last = $xorsum = hash_hmac($algorithm, $last, $password, true);
+        // perform the other $count - 1 iterations
+        for ($j = 1; $j < $count; $j++) {
+            $xorsum ^= ($last = hash_hmac($algorithm, $last, $password, true));
+        }
+        $output .= $xorsum;
+    }
+
+    if($raw_output)
+        return substr($output, 0, $key_length);
+    else
+        return bin2hex(substr($output, 0, $key_length));
+}
+
+echo pbkdf2('sha256', '1234', 'salt', 4, 32);
+```
+
 ### HMAC RipeMD160
 This implements HMAC-RipeMD160.
 ```

@@ -4,7 +4,7 @@ CXXFLAGS=
 
 OBJS=md5.o md4.o ripemd160.o sha256.o crc16.o crc32.o crc64.o \
 	hmac_md5.o hmac_sha256.o hmac_sha384.o hmac_sha512.o \
-	hmac_ripemd160.o pbkdf2.o main.o
+	hmac_ripemd160.o pbkdf2_hmac_sha256.o main.o
 
 TARGET=example
 
