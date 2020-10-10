@@ -16,6 +16,7 @@ int hmac_sha256();
 int hmac_sha384();
 int hmac_sha512();
 int hmac_ripemd160();
+int pbkdf2_hmac_sha256();
 
 int main() {
 	md4();
@@ -30,4 +31,5 @@ int main() {
 	hmac_sha384();
 	hmac_sha512();
 	hmac_ripemd160();
+	pbkdf2_hmac_sha256();
 }

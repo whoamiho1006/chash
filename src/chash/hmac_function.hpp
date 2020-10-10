@@ -18,6 +18,9 @@ namespace chash {
 		/* get algorithm type. */
 		inline algorithm type() const { return _type; }
 
+		/* bit width of this algorithm. */
+		virtual size_t width() const = 0;
+
 		/* initiate the algorithm. */
 		virtual bool init(const uint8_t* key, size_t size) = 0;
 

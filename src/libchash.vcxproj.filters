@@ -93,6 +93,9 @@
     <ClInclude Include="chash\hmac\hmac_crc.hpp">
       <Filter>chash\hmac</Filter>
     </ClInclude>
+    <ClInclude Include="chash\pbkdf2_function.hpp">
+      <Filter>chash</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="chash">

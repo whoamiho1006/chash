@@ -169,6 +169,7 @@
     <ClInclude Include="chash\hmac_function.hpp" />
     <ClInclude Include="chash\md\md4.hpp" />
     <ClInclude Include="chash\md\md5.hpp" />
+    <ClInclude Include="chash\pbkdf2_function.hpp" />
     <ClInclude Include="chash\ripemd\ripemd128.hpp" />
     <ClInclude Include="chash\ripemd\ripemd160.hpp" />
     <ClInclude Include="chash\sha\sha256.hpp" />

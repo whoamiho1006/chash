@@ -2,6 +2,7 @@
 #include "chash/boilerplate.hpp"
 #include "chash/hash_function.hpp"
 #include "chash/hmac_function.hpp"
+#include "chash/pbkdf2_function.hpp"
 #include <memory>
 
 namespace chash {

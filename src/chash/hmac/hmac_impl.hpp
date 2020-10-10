@@ -26,6 +26,10 @@ namespace chash {
 		uint8_t _o_key[BLOCK_SIZE];
 
 	public:
+		size_t width() const override {
+			return _algo.width();
+		}
+
 		bool init(const uint8_t* key, size_t size) {
 			if (_init) {
 				return false;
@@ -81,6 +85,8 @@ namespace chash {
 			_algo.update(&digest[0], digest.size());
 
 			_algo.finalize(outDigest);
+
+			_init = false;
 		}
 	};
 }
