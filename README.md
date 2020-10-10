@@ -6,6 +6,7 @@ Hash algorithm library in C++.
 ## code reviews
 1. https://codereview.stackexchange.com/questions/250149/simple-c-hash-function-library
 2. https://codereview.stackexchange.com/questions/250172/simple-c-hash-library-and-its-abstraction-design-that-seems-out-of-focus
+
 Thank you so much, G. Sliepen!
 
 ## examples
